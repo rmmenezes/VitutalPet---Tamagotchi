@@ -13,5 +13,9 @@ namespace VitutalPet___Tamagotchi
         {
 
         }
+        protected void Entrar(object sender, EventArgs e)
+        {
+            Response.Redirect("tamagotchi.aspx");
+        }
     }
 }

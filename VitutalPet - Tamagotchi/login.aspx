@@ -25,7 +25,7 @@
 
 <body style="background-color: #ffd700;">
 
-    <div class="container droppedHover" style="width: 30%">
+    <div class="container droppedHover" style="width: 350px">
         <h1 style="text-align: center; font-family: 'Chewy', cursive; font-size: 70px">Os Simpsons</h1>
         <h1 style="text-align: center; font-family: 'Chewy', cursive; font-size: 30px">Tamagotchi Game</h1>
         <form class="form-signin" role="form" runat="server">
@@ -34,7 +34,7 @@
             <br />
             <input class="form-control" placeholder="Password" required="" contenteditable="false" type="password" />
             <br />
-            <asp:Button Text="Sign in" runat="server" CssClass="btn btn-lg btn-success btn-block" />
+            <asp:Button Text="Sign in" runat="server" CssClass="btn btn-lg btn-success btn-block" OnClick="Entrar" />
             <asp:Button Text="Create an account" runat="server" CssClass="btn btn-lg btn-primary btn-block" />
 
         </form>
