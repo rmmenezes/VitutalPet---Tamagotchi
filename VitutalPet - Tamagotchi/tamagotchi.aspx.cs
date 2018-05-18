@@ -11,13 +11,29 @@ namespace VitutalPet___Tamagotchi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
-        protected void bbtDormir_Click(object sender, EventArgs e)
+        protected void BT_dormir(object sender, EventArgs e)
         {
-            Subtitulo.Text = "Rafael Menezes";
-           
+            bool noite = false;
+            if(noite == false)
+            {
+                background.Attributes["style"] = "background-color: #070317; opacity: 0.2";
+                barraSono.Attributes["style"] = "width: 100%;";
+                noite = true;
+            }
+            if(noite == true)
+            {
+                background.Attributes["style"] = "background-color: #070317; opacity: 1";
+                barraSono.Attributes["style"] = "width: 0%;";
+                noite = false;
+            }
+
+
+            
+
+
         }
     }
 }

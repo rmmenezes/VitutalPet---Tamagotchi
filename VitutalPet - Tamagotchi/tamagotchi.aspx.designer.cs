@@ -13,6 +13,15 @@ namespace VitutalPet___Tamagotchi {
     public partial class tamagotchi {
         
         /// <summary>
+        /// Controle background.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl background;
+        
+        /// <summary>
         /// Controle form1.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,13 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Controle Subtitulo.
+        /// Controle barraSono.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Subtitulo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraSono;
         
         /// <summary>
         /// Controle bbtDormir.
