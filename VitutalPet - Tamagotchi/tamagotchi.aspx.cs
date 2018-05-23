@@ -1,12 +1,17 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using VitutalPet___Tamagotchi.Models;
 
 namespace VitutalPet___Tamagotchi
 {
+
+
+
     public partial class tamagotchi : System.Web.UI.Page
     {
         string estado;
@@ -14,38 +19,47 @@ namespace VitutalPet___Tamagotchi
         int txFome, txSaude, txFelicidade, txSono; //taxas de decaimento (muda de acordo com o estado)
         //
         bool noite = false;
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            
-        }
+
 
         protected void BT_dormir(object sender, EventArgs e)
         {
-            
-            if(noite == false)
+
+            if (noite == false)
             {
                 background.Attributes["style"] = "background-color: #070317; opacity: 0.2";
                 barraSono.Attributes["style"] = "width: 100%;";
                 noite = true;
             }
-            if(noite == true)
+            if (noite == true)
             {
                 background.Attributes["style"] = "background-color: #070317; opacity: 1";
                 barraSono.Attributes["style"] = "width: 0%;";
                 noite = false;
+
             }
-
-
-            
-
-
         }
 
-        protected void Tamagotchi(object sender, EventArgs e, DateTime lastTime)
+        protected void Conect(object sender, EventArgs e)
         {
-            TimeSpan deltaTime = DateTime.Now - lastTime;
-            
+            var c = new MongoDB.Driver.MongoClient();
+            var db = c.GetDatabase("TesteTamagotchi");
+            var coll = db.GetCollection<User>("User");
 
+            var t = coll
+                .Find(b => b.Username == "Rafael")
+                .Limit(1)
+                .ToListAsync()
+                .Result;
+
+            //Tamagotchi(sender, e, t[0], 0);
+        }
+
+
+
+        protected void Tamagotchi(object sender, EventArgs e,  User t, DateTime lastTime)
+        {
+            
+            TimeSpan deltaTime = DateTime.Now - lastTime;
             if (estado == "normal")
             {
                 txFome = 3; txFelicidade = 2; txSaude = 2; txSono = 2;
@@ -71,7 +85,7 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "cansado";
                 }
-                
+
             }
             else if (estado == "doente")
             {
@@ -212,5 +226,10 @@ namespace VitutalPet___Tamagotchi
                 felicidade = 0;
             }
         }
+
     }
+
+        
+
+    
 }

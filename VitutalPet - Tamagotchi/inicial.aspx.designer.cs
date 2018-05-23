@@ -10,7 +10,7 @@
 namespace VitutalPet___Tamagotchi {
     
     
-    public partial class login {
+    public partial class inicial {
         
         /// <summary>
         /// Controle background.
@@ -22,30 +22,30 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl background;
         
         /// <summary>
-        /// Controle username.
+        /// Controle form1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox username;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Controle password.
+        /// Controle nomePet.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        protected global::System.Web.UI.WebControls.TextBox nomePet;
         
         /// <summary>
-        /// Controle nome.
+        /// Controle addTamagotchi.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label nome;
+        protected global::System.Web.UI.WebControls.Button addTamagotchi;
     }
 }
