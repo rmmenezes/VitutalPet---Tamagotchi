@@ -13,7 +13,7 @@ namespace VitutalPet___Tamagotchi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+           // pronto agora sim
         }
 
         public void Btn_Entrar(object sender, EventArgs e)
