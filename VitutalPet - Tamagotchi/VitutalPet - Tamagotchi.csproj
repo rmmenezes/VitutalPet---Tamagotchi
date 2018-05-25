@@ -107,6 +107,7 @@
     <Content Include="Person\sleep1.jpg" />
     <Content Include="Person\sleep2.png" />
     <Content Include="Person\wallpaper.jpg" />
+    <Content Include="Person\índice.jpg" />
     <Content Include="tamagotchi.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
