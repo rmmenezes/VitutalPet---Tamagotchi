@@ -26,14 +26,19 @@
 <body runat="server" id="background" style="background-color: #ffd700;">
     <form id="form1" runat="server">
         <div class="container" >
-            <h1 style="font-family: 'Chewy';"> Adcionar e Editar</h1>
 
-            <img src="/Person/Homer.jpg " class="img-circle" width="100" height="100"/> 
-            <img src="/Person/Bart.jpg " class="img-circle" width="100" height="100"/> 
-            <img src="/Person/Lisa.jpg " class="img-circle" width="100" height="100"/> 
-            <img src="/Person/Maggie.jpg " class="img-circle" width="100" height="100"/> 
-            <img src="/Person/Marge.jpg " class="img-circle" width="100" height="100"/> 
-            <img src="/Person/Ned.jpg " class="img-circle" width="100" height="100"/> 
+            <asp:Label  id="bemvindo"  runat="server"  Text="" style="font-family: Chewy; font-size: 25px ;"/>
+            <h3 style="font-family: 'Chewy';"> Adcionar e Editar</h3>
+
+            <asp:ImageButton ImageUrl="/Person/Homer.jpg" BackColor="Black" id="Btn_homer" runat="server" CssClass="img-circle active" width="100" height="100" OnClick="HomerSelect" />
+            <asp:ImageButton ImageUrl="/Person/Bart.jpg" runat="server" CssClass="img-circle" width="100" height="100" />
+            <asp:ImageButton ImageUrl="/Person/Lisa.jpg" runat="server" CssClass="img-circle" width="100" height="100" />
+            <asp:ImageButton ImageUrl="/Person/Maggie.jpg" runat="server" CssClass="img-circle" width="100" height="100" />
+            <asp:ImageButton ImageUrl="/Person/Marge.jpg" runat="server" CssClass="img-circle" BackColor="Red" width="100" height="100" />
+            <asp:ImageButton ImageUrl="/Person/Ned.jpg" runat="server" CssClass="img-circle" width="100" height="100" />
+
+
+
             <br />
             <h3>Nome do Tamagotchi:</h3>
             <asp:TextBox runat="server" id="nomePet" Text="" CssClass="form-control"/>

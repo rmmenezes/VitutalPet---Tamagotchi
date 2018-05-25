@@ -31,6 +31,24 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// Controle bemvindo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label bemvindo;
+        
+        /// <summary>
+        /// Controle Btn_homer.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton Btn_homer;
+        
+        /// <summary>
         /// Controle nomePet.
         /// </summary>
         /// <remarks>

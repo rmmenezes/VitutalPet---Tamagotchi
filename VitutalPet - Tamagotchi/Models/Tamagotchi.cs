@@ -9,7 +9,8 @@ namespace VitutalPet___Tamagotchi.Models
     public class Tamagotchi
     {
         public ObjectId Id { get; set; }
-        public String Nome { get; set; }
+        public String Nome_Tamagotchi { get; set; }
+        public String Nome_User { get; set; }
         public String Estado { get; set; }
         public int Fome { get; set; }
         public int Felicidade { get; set; }

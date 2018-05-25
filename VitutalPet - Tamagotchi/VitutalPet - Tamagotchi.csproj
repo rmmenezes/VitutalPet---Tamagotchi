@@ -87,14 +87,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Homer.html" />
     <Content Include="inicial.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Person\Bart.JPG" />
+    <Content Include="Person\food1.png" />
+    <Content Include="Person\food2.png" />
+    <Content Include="Person\food3.gif" />
+    <Content Include="Person\food4.png" />
     <Content Include="Person\Homer.JPG" />
     <Content Include="Person\Lisa.JPG" />
     <Content Include="Person\Maggie.JPG" />
     <Content Include="Person\Marge.JPG" />
     <Content Include="Person\Ned.JPG" />
+    <Content Include="Person\play1.jpg" />
+    <Content Include="Person\play2.jpg" />
+    <Content Include="Person\play3.jpg" />
+    <Content Include="Person\sleep1.jpg" />
+    <Content Include="Person\sleep2.png" />
     <Content Include="tamagotchi.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -137,9 +147,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

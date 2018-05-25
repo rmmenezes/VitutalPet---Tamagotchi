@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace VitutalPet___Tamagotchi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            bemvindo.Text = "Bem Vindo " + Session["Auth"].ToString();
         }
 
         public void Tamagotchiadd(object sender, EventArgs e)
@@ -24,21 +25,33 @@ namespace VitutalPet___Tamagotchi
             var users = database.GetCollection<User>("user");
             var tam = database.GetCollection<Tamagotchi>("tamagotchi");
 
-            Tamagotchi t = CreateTamagotchi(tam, nome);
+            var UserLogged = Session["Auth"];
+            
+            Tamagotchi t = CreateTamagotchi(tam, nome, UserLogged.ToString());
+
             Response.Redirect("tamagotchi.aspx");
         }
 
-        private Tamagotchi CreateTamagotchi(IMongoCollection<Tamagotchi> tam, string nome)
+        public void HomerSelect(object sender, EventArgs e)
+        {
+            Btn_homer.BackColor = System.Drawing.Color.Red;
+        }
+
+        private Tamagotchi CreateTamagotchi(IMongoCollection<Tamagotchi> tam, string nome, string nome_User)
         {
             Tamagotchi t = new Tamagotchi();
 
-            t.Nome = nome;
+            t.Nome_User = nome_User;
+            t.Nome_Tamagotchi = nome;
             t.Saude = 100;
             t.Sono = 0;
             t.Felicidade = 100;
             t.Estado = "normal";
             t.Tempo = DateTime.Now;
-            tam.InsertOneAsync(t);
+
+            //insere na minha collection (tabela) -> tamagotchi 
+            tam.InsertOne(t);
+
             return t;
         }
     }

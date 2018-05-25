@@ -20,21 +20,26 @@ namespace VitutalPet___Tamagotchi
         {
             String user = username.Text;
             String pass = password.Text;
+            
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("TesteTamagotchi");
             var users = database.GetCollection<User>("user");
             var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
 
             User UserLogged = Verifica(users, user, pass);
-            if( UserLogged != null)
+            
+
+
+            if ( UserLogged != null)
             {
+                Session["Auth"] = UserLogged.Username;
                 Response.Redirect("inicial.aspx");
             }
             else
             {
-
+                //Implementar caso de erro.
             }
-            nome.Text = UserLogged.Username;
+
         }
 
 
@@ -68,7 +73,6 @@ namespace VitutalPet___Tamagotchi
             {
                 return null;
             }
-            
         }
 
 

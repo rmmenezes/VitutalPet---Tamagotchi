@@ -40,12 +40,12 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraSono;
         
         /// <summary>
-        /// Controle bbtDormir.
+        /// Controle Div1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bbtDormir;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
     }
 }

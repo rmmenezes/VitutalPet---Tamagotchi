@@ -11,6 +11,6 @@ namespace VitutalPet___Tamagotchi.Models
         public ObjectId Id { get; set; }
         public String Username { get; set; }
         public String Password { get; set; }
-        public List<Tamagotchi> ListTamagotchis { get; set; }
+        public List<Tamagotchi> List { get; set; }
     }
 }
