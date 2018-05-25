@@ -86,6 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="game1.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Homer.html" />
     <Content Include="inicial.aspx" />
@@ -105,10 +106,18 @@
     <Content Include="Person\play3.jpg" />
     <Content Include="Person\sleep1.jpg" />
     <Content Include="Person\sleep2.png" />
+    <Content Include="Person\wallpaper.jpg" />
     <Content Include="tamagotchi.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="game1.aspx.cs">
+      <DependentUpon>game1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="game1.aspx.designer.cs">
+      <DependentUpon>game1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="inicial.aspx.cs">
       <DependentUpon>inicial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

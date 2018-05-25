@@ -25,8 +25,8 @@
 </head>
 <body runat="server" id="background" style="background-color: #ffd700;">
     <form id="form1" runat="server">
-        <div class="container" >
-
+        <div class="container">
+            <div style="text-align:center">
             <asp:Label  id="bemvindo"  runat="server"  Text="" style="font-family: Chewy; font-size: 25px ;"/>
             <h3 style="font-family: 'Chewy';"> Adcionar e Editar</h3>
 
@@ -36,7 +36,7 @@
             <asp:ImageButton ImageUrl="/Person/Maggie.jpg" runat="server" CssClass="img-circle" width="100" height="100" />
             <asp:ImageButton ImageUrl="/Person/Marge.jpg" runat="server" CssClass="img-circle" BackColor="Red" width="100" height="100" />
             <asp:ImageButton ImageUrl="/Person/Ned.jpg" runat="server" CssClass="img-circle" width="100" height="100" />
-
+            </div>
 
 
             <br />

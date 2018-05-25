@@ -39,6 +39,11 @@ namespace VitutalPet___Tamagotchi
             }
         }
 
+        public void OpenGameBoll(object sender, EventArgs e)
+        {
+            Response.Redirect("game1.aspx");
+        }
+
         protected void Conect(object sender, EventArgs e)
         {
             var c = new MongoDB.Driver.MongoClient();

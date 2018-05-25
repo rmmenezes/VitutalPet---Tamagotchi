@@ -41,7 +41,7 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="text-align:center">
                         <h3>Vida</h3>
                         <div class="progress">
                             <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -51,7 +51,7 @@
                         <button type="button" class="btn btn-warning">Comer :V</button>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3"  style="text-align:center">
                         <h3>Fome</h3>
                         <div class="progress">
                             <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -63,8 +63,8 @@
                         <asp:ImageButton ImageUrl="/Person/food3.gif" runat="server" CssClass="img-circle active" width="50" height="50" />
                     </div>
 
-                    <div class="col-md-3">
-                        <h3>Sono</h3>
+                    <div class="col-md-3"  style="text-align:center">
+                         <h3>Sono</h3>
                         <div class="progress">
                             <div runat="server" id="barraSono" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                                 <span class="sr-only">60% Complete</span>
@@ -74,7 +74,7 @@
                         <asp:ImageButton ImageUrl="/Person/sleep2.png" runat="server" CssClass="img-circle active" width="50" height="50" />  
                    </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3"  style="text-align:center">
                         <h3>Felicidade</h3>
                         <div class="progress">
 
@@ -84,7 +84,7 @@
                         </div>
                         <asp:ImageButton ImageUrl="/Person/play1.jpg" runat="server" CssClass="img-circle active" width="50" height="50" />
                         <asp:ImageButton ImageUrl="/Person/play2.jpg" runat="server" CssClass="img-circle active" width="50" height="50" />
-                        <asp:ImageButton ImageUrl="/Person/play3.jpg" runat="server" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/play3.jpg" runat="server" OnClick="OpenGameBoll" CssClass="img-circle active" width="50" height="50" />
                     </div>
                 </div>
 

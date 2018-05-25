@@ -16,7 +16,7 @@ namespace VitutalPet___Tamagotchi
            
         }
 
-        public  void Btn_Entrar(object sender, EventArgs e)
+        public void Btn_Entrar(object sender, EventArgs e)
         {
             String user = username.Text;
             String pass = password.Text;
