@@ -31,13 +31,13 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Controle barraSono.
+        /// Controle barra_sono.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraSono;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barra_sono;
         
         /// <summary>
         /// Controle Div1.

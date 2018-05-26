@@ -42,19 +42,18 @@
                 <div class="row">
 
                     <div class="col-md-3" style="text-align:center">
-                        <h3>Vida</h3>
+                        <h3>Vitalidade</h3>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <div class="progress-bar progress-bar-warning" id="barra_vida" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning">Comer :V</button>
                     </div>
 
                     <div class="col-md-3"  style="text-align:center">
                         <h3>Fome</h3>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <div class="progress-bar progress-bar-warning" id="barra_fome" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
@@ -66,7 +65,7 @@
                     <div class="col-md-3"  style="text-align:center">
                          <h3>Sono</h3>
                         <div class="progress">
-                            <div runat="server" id="barraSono" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                            <div runat="server" class="progress-bar" id="barra_sono" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
@@ -78,7 +77,7 @@
                         <h3>Felicidade</h3>
                         <div class="progress">
 
-                            <div runat="server" id="Div1" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                            <div runat="server" id="Div1" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
