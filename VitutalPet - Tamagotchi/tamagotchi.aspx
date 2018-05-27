@@ -21,6 +21,13 @@
     <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet" />
     <!-- font-family: 'Chewy', cursive; -->
     <link rel="stylesheet" href="css/homer.css" />
+    <link rel="stylesheet" href="css/lisa.css" />
+    <link rel="stylesheet" href="css/bart.css" />
+    <link rel="stylesheet" href="css/marge.css" />
+    <link rel="stylesheet" href="css/maggie.css" />
+    <link rel="stylesheet" href="css/ned-flanders.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    
 
 </head>
 <body id="background" runat="server">
