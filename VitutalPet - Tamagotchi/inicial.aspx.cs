@@ -46,6 +46,7 @@ namespace VitutalPet___Tamagotchi
             t.Nome_Tamagotchi = nome;
             t.Saude = 100;
             t.Sono = 0;
+            t.Fome = 100;
             t.Felicidade = 100;
             t.Estado = "normal";
             t.Tempo = DateTime.Now;
