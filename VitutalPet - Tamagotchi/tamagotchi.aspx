@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="refresh" content="15"/>
+    <meta http-equiv="refresh" content="10"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>VIRTUAL PET</title>
     <!-- Latest compiled and minified CSS -->
@@ -44,7 +44,7 @@
                     <div class="col-md-3" style="text-align:center">
                         <h3>Vitalidade</h3>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-warning" id="barra_vida" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <div class="progress-bar progress-bar-warning" id="barra_vida" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
@@ -53,13 +53,13 @@
                     <div class="col-md-3"  style="text-align:center">
                         <h3>Fome</h3>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-warning" id="barra_fome" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <div class="progress-bar progress-bar-warning" id="barra_fome" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
-                        <asp:ImageButton ImageUrl="/Person/food1.png" runat="server" CssClass="img-circle active" width="50" height="50" />
-                        <asp:ImageButton ImageUrl="/Person/food2.png" runat="server" CssClass="img-circle active" width="50" height="50" />
-                        <asp:ImageButton ImageUrl="/Person/food3.gif" runat="server" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/food1.png" runat="server" OnClick="Donuts" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/food2.png" runat="server" OnClick="Frango" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/food3.gif" runat="server" OnClick="Cerveja" CssClass="img-circle active" width="50" height="50" />
                     </div>
 
                     <div class="col-md-3"  style="text-align:center">
@@ -69,15 +69,15 @@
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
-                        <asp:ImageButton ImageUrl="/Person/sleep1.jpg" runat="server" CssClass="img-circle active" width="50" height="50" />                    
-                        <asp:ImageButton ImageUrl="/Person/sleep2.png" runat="server" CssClass="img-circle active" width="50" height="50" />  
+                        <asp:ImageButton ImageUrl="/Person/sleep1.jpg" runat="server" OnClick="Cama" CssClass="img-circle active" width="50" height="50" />                    
+                        <asp:ImageButton ImageUrl="/Person/sleep2.png" runat="server" OnClick="Sofa" CssClass="img-circle active" width="50" height="50" />  
                    </div>
 
                     <div class="col-md-3"  style="text-align:center">
                         <h3>Felicidade</h3>
                         <div class="progress">
 
-                            <div runat="server" id="Div1" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <div runat="server" id="barra_felicidade" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>

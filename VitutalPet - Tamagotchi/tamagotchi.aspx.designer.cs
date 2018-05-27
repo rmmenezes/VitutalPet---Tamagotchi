@@ -31,6 +31,24 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// Controle barra_vida.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barra_vida;
+        
+        /// <summary>
+        /// Controle barra_fome.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barra_fome;
+        
+        /// <summary>
         /// Controle barra_sono.
         /// </summary>
         /// <remarks>
@@ -40,12 +58,12 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl barra_sono;
         
         /// <summary>
-        /// Controle Div1.
+        /// Controle barra_felicidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barra_felicidade;
     }
 }
