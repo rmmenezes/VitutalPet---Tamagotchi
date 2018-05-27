@@ -15,6 +15,7 @@ namespace VitutalPet___Tamagotchi
         protected void Page_Load(object sender, EventArgs e)
         {
             bemvindo.Text = "Bem Vindo " + Session["Auth"].ToString();
+
         }
 
         public void Tamagotchiadd(object sender, EventArgs e)
@@ -27,17 +28,17 @@ namespace VitutalPet___Tamagotchi
 
             var UserLogged = Session["Auth"];
             
-            Tamagotchi t = CreateTamagotchi(tam, nome, UserLogged.ToString());
-
+            Tamagotchi t = CreateTamagotchi(tam, nome, personagem.Text, UserLogged.ToString());
+            Session["Personagem"] = personagem.Text;
             Response.Redirect("tamagotchi.aspx");
         }
 
-        public void HomerSelect(object sender, EventArgs e)
-        {
-            Btn_homer.BackColor = System.Drawing.Color.Red;
-        }
+        //public void HomerSelect(object sender, EventArgs e)
+        //{
+            //Btn_homer.BackColor = System.Drawing.Color.Red;
+        //}
 
-        private Tamagotchi CreateTamagotchi(IMongoCollection<Tamagotchi> tam, string nome, string nome_User)
+        private Tamagotchi CreateTamagotchi(IMongoCollection<Tamagotchi> tam, string nome, string personagem, string nome_User)
         {
             Tamagotchi t = new Tamagotchi();
 
@@ -48,11 +49,43 @@ namespace VitutalPet___Tamagotchi
             t.Felicidade = 100;
             t.Estado = "normal";
             t.Tempo = DateTime.Now;
+            t.Personagem = personagem;
 
             //insere na minha collection (tabela) -> tamagotchi 
             tam.InsertOne(t);
 
             return t;
         }
+
+        protected void SelectPersonagem(object sender, ImageClickEventArgs e)
+        {
+            var imageButton = sender as ImageButton;
+
+            if (imageButton.ID == "homer")
+            {
+                personagem.Text = "Homer";
+            }
+            else if (imageButton.ID == "bart")
+            {
+                personagem.Text = "Bart";
+            }
+            else if (imageButton.ID == "lisa")
+            {
+                personagem.Text = "Lisa";
+            }
+            else if (imageButton.ID == "maggie")
+            {
+                personagem.Text = "Maggie";
+            }
+            else if (imageButton.ID == "marge")
+            {
+                personagem.Text = "Marge";
+            }
+            else if (imageButton.ID == "ned")
+            {
+                personagem.Text = "Ned";
+            }
+        }
+
     }
 }

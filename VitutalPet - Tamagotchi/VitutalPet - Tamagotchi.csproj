@@ -88,7 +88,6 @@
   <ItemGroup>
     <Content Include="game1.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Homer.html" />
     <Content Include="inicial.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Person\Bart.JPG" />

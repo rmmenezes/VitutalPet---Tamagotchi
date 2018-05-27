@@ -20,7 +20,9 @@
     <link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet" />
     <!-- font-family: 'Chewy', cursive; -->
+    <link rel='stylesheet' href='css/normalize.css'/>
     <link rel="stylesheet" href="css/homer.css" />
+    <link rel='stylesheet' href='css/bart.css' />
 
 </head>
 <body id="background" runat="server">
@@ -35,8 +37,8 @@
                 </div>
                 <!-- /.container-fluid -->
             </nav>
-            
-            <%= Homer() %>
+
+           <%= Homer() %>
 
             <div class="container">
                 <div class="row">
@@ -44,7 +46,7 @@
                     <div class="col-md-3" style="text-align:center">
                         <h3>Vitalidade</h3>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-warning" id="barra_vida" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <div runat="server" class="progress-bar progress-bar-warning" id="barra_vida" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
@@ -53,13 +55,14 @@
                     <div class="col-md-3"  style="text-align:center">
                         <h3>Fome</h3>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-warning" id="barra_fome" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <div runat="server" class="progress-bar progress-bar-warning" id="barra_fome" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
-                        <asp:ImageButton ImageUrl="/Person/food1.png" runat="server" CssClass="img-circle active" width="50" height="50" />
-                        <asp:ImageButton ImageUrl="/Person/food2.png" runat="server" CssClass="img-circle active" width="50" height="50" />
-                        <asp:ImageButton ImageUrl="/Person/food3.gif" runat="server" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/food1.png" runat="server" ID="food1" OnClick="GiveFood" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/food2.png" runat="server" ID="food2" OnClick="GiveFood" CssClass="img-circle active" width="50" height="50" />
+                        <asp:ImageButton ImageUrl="/Person/food3.gif" runat="server" ID="food3" OnClick="GiveFood" CssClass="img-circle active" width="50" height="50" />
+                        
                     </div>
 
                     <div class="col-md-3"  style="text-align:center">
@@ -76,8 +79,7 @@
                     <div class="col-md-3"  style="text-align:center">
                         <h3>Felicidade</h3>
                         <div class="progress">
-
-                            <div runat="server" id="Div1" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <div runat="server" id="barra_felicidade" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>

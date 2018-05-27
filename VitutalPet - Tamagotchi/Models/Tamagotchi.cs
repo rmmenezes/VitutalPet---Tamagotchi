@@ -17,5 +17,6 @@ namespace VitutalPet___Tamagotchi.Models
         public int Saude { get; set; }
         public int Sono { get; set; }
         public DateTime Tempo { get; set; }
+        public String Personagem { get; set; }
     }
 }
