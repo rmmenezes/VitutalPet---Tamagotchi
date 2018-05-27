@@ -30,7 +30,7 @@
     
 
 </head>
-<body id="background" runat="server">
+<body id="background" runat="server" style="background-image: url(/Person/background.jpg); background-color: black;">
     <form id="form1" runat="server">
         <div>
             <nav class="navbar navbar-default">
@@ -98,7 +98,7 @@
                 </footer>
             </div>
         </div>
-        <div>
+        <div  style=" text-align:center; position:absolute; bottom:0; width:100%;">
                     <p id="foot">Rafael Menezes Barboza e Jonas Felipe Alves - UTFPR Campo Mourão Paraná - (Tamagotchi in Asp.Net C#)</p>
         </div>
     </form>

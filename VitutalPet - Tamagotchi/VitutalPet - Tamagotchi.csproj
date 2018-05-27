@@ -90,6 +90,8 @@
     <Content Include="Global.asax" />
     <Content Include="inicial.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="Person\background.jpg" />
+    <Content Include="Person\background1.jpg" />
     <Content Include="Person\Bart.JPG" />
     <Content Include="Person\food1.png" />
     <Content Include="Person\food2.png" />
