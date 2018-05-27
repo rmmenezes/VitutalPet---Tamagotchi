@@ -40,14 +40,12 @@
                         <a class="navbar-brand" href="#">Tamagotchi</a>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </nav>
-            
             <%= Homer() %>
 
             <div class="container">
                 <div class="row">
-
+                <asp:Label Text="" runat="server" id="tempo" />     
                     <div class="col-md-3" style="text-align:center">
                         <h3>Vitalidade</h3>
                         <div class="progress">

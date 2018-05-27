@@ -25,8 +25,7 @@ namespace VitutalPet___Tamagotchi
 
             string estado = tamagotchi_Logged.Estado;
             int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;        //indices do pet (definem o estado)
-            DateTime tempo = tamagotchi_Logged.Tempo;
-            Tamagotchi(fome, saude, felicidade, sono, tempo, estado, tamagotchi_Logged, database);
+            Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, estado, tamagotchi_Logged, database);
         }
 
         public void OpenGameBoll(object sender, EventArgs e)
@@ -57,7 +56,8 @@ namespace VitutalPet___Tamagotchi
         {
             int txFome, txSaude, txFelicidade, txSono; //taxas de decaimento (muda de acordo com o estado)
 
-            TimeSpan deltaTime = lastTime - DateTime.Now;
+            TimeSpan deltaTime = DateTime.Now.Subtract(DateTime.Now);
+            
             if (estado == "normal")
             {
                 txFome = 3; txFelicidade = 2; txSaude = 2; txSono = 2;
@@ -223,6 +223,8 @@ namespace VitutalPet___Tamagotchi
                 saude = 0;
                 felicidade = 0;
             }
+            tempo.Text = DateTime.Now.Subtract(lastTime).ToString();
+
             barra_sono.Attributes["style"] = "width: " + sono.ToString() + "%;";
             barra_felicidade.Attributes["style"] = "width: " + felicidade.ToString() + "%;";
             barra_fome.Attributes["style"] = "width: " + fome.ToString() + "%;";
