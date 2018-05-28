@@ -44,10 +44,10 @@ namespace VitutalPet___Tamagotchi
 
             t.Nome_User = nome_User;
             t.Nome_Tamagotchi = nome;
-            t.Saude = 100;
-            t.Sono = 0;
-            t.Fome = 100;
-            t.Felicidade = 100;
+            t.Saude = 100.00;
+            t.Sono = 100.00;
+            t.Fome = 100.00;
+            t.Felicidade = 100.00;
             t.Estado = "normal";
             t.Tempo = DateTime.Now;
             t.Personagem = personagem;

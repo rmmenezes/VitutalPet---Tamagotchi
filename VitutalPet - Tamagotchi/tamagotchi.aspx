@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="refresh" content="10"/>
+    <meta http-equiv="refresh" content="3"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>VIRTUAL PET</title>
     <!-- Latest compiled and minified CSS -->
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col-md-3"  style="text-align:center">
-                        <h3>Fome</h3>
+                        <h3>Alimentação</h3>
                         <div class="progress">
                             <div class="progress-bar progress-bar-warning" id="barra_fome" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>
@@ -66,9 +66,10 @@
                         <asp:ImageButton ImageUrl="/Person/food2.png" runat="server" OnClick="Frango" CssClass="img-circle active" width="50" height="50" />
                         <asp:ImageButton ImageUrl="/Person/food3.gif" runat="server" OnClick="Cerveja" CssClass="img-circle active" width="50" height="50" />
                     </div>
+                    <asp:Label Text="" id="test" runat="server" />
 
                     <div class="col-md-3"  style="text-align:center">
-                         <h3>Sono</h3>
+                         <h3>Energia</h3>
                         <div class="progress">
                             <div runat="server" class="progress-bar" id="barra_sono" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                 <span class="sr-only">60% Complete</span>

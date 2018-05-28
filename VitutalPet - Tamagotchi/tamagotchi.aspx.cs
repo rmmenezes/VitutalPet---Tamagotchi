@@ -24,7 +24,7 @@ namespace VitutalPet___Tamagotchi
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             string estado = tamagotchi_Logged.Estado;
-            int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;        //indices do pet (definem o estado)
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;        //indices do pet (definem o estado)
             Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, estado, tamagotchi_Logged, database);
         }
 
@@ -52,22 +52,23 @@ namespace VitutalPet___Tamagotchi
         }
 
 
-        protected void Tamagotchi(float fome, float saude, float felicidade, float sono, DateTime lastTime, string estado, Tamagotchi t, IMongoDatabase database)
+        protected void Tamagotchi(double fome, double saude, double felicidade, double sono, DateTime lastTime, string estado, Tamagotchi t, IMongoDatabase database)
         {
             int txFome, txSaude, txFelicidade, txSono; //taxas de decaimento (muda de acordo com o estado)
 
-            TimeSpan deltaTime = DateTime.Now.Subtract(DateTime.Now);
+            TimeSpan deltaTime = lastTime.Subtract(DateTime.Now);
+            test.Text = deltaTime.ToString();
             
             if (estado == "normal")
             {
                 txFome = 3; txFelicidade = 2; txSaude = 2; txSono = 2;
 
-                fome = fome - ((txFome * (int)deltaTime.Hours) / 4);
-                saude = saude - ((txSaude * (int)deltaTime.Hours) / 4);
-                felicidade = felicidade - ((txFelicidade * (int)deltaTime.Hours) / 4);
-                sono = sono + ((txSono * (int)deltaTime.Hours) / 4);
+                fome = fome - ((0.3 * txFome) / 15);//(int)deltaTime.Hours
+                saude = saude - ((0.3 * txSaude) / 15);//(int)deltaTime.Hours
+                felicidade = felicidade - ((0.3 * txFelicidade) / 15);//(int)deltaTime.Hours
+                sono = sono - ((0.3 * txSono) / 15);//(int)deltaTime.Hours
 
-                if (fome <= 0 || saude <= 0 || felicidade <= 0)
+                if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
                     estado = "morto";
                 }
@@ -79,7 +80,7 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "triste";
                 }
-                else if (sono > 80)
+                else if (sono < 20)
                 {
                     estado = "cansado";
                 }
@@ -89,12 +90,12 @@ namespace VitutalPet___Tamagotchi
             {
                 txFome = 3; txFelicidade = 5; txSaude = 7; txSono = 4;
 
-                fome = fome - ((txFome * (int)deltaTime.Hours) / 4);
-                saude = saude - ((txSaude * (int)deltaTime.Hours) / 4);
-                felicidade = felicidade - ((txFelicidade * (int)deltaTime.Hours) / 4);
-                sono = sono + ((txSono * (int)deltaTime.Hours) / 4);
+                fome = fome - ((0.3 * txFome) / 15);//(int)deltaTime.Hours
+                saude = saude - ((0.3 * txSaude) / 15);//(int)deltaTime.Hours
+                felicidade = felicidade - ((0.3 * txFelicidade) / 15);//(int)deltaTime.Hours
+                sono = sono - ((0.3 * txSono) / 15);//(int)deltaTime.Hours
 
-                if (fome <= 0 || saude <= 0 || felicidade <= 0)
+                if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
                     estado = "morto";
                 }
@@ -106,7 +107,7 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "triste";
                 }
-                else if (sono > 80)
+                else if (sono < 20)
                 {
                     estado = "cansado";
                 }
@@ -115,12 +116,12 @@ namespace VitutalPet___Tamagotchi
             {
                 txFome = 3; txFelicidade = 4; txSaude = 4; txSono = 15;
 
-                fome = fome - ((txFome * (int)deltaTime.Hours) / 4);
-                saude = saude - ((txSaude * (int)deltaTime.Hours) / 4);
-                felicidade = felicidade - ((txFelicidade * (int)deltaTime.Hours) / 4);
-                sono = sono + ((txSono * (int)deltaTime.Hours) / 4);
+                fome = fome - ((0.3 * txFome) / 15);//(int)deltaTime.Hours
+                saude = saude - ((0.3 * txSaude) / 15);//(int)deltaTime.Hours
+                felicidade = felicidade - ((0.3 * txFelicidade) / 15);//(int)deltaTime.Hours
+                sono = sono - ((0.3 * txSono) / 15);//(int)deltaTime.Hours
 
-                if (fome <= 0 || saude <= 0 || felicidade <= 0)
+                if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
                     estado = "morto";
                 }
@@ -132,7 +133,7 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "triste";
                 }
-                else if (sono > 80)
+                else if (sono < 20)
                 {
                     estado = "cansado";
                 }
@@ -141,12 +142,12 @@ namespace VitutalPet___Tamagotchi
             {
                 txFome = 3; txFelicidade = 5; txSaude = 6; txSono = 1;
 
-                fome = fome - ((txFome * (int)deltaTime.Hours) / 4);
-                saude = saude - ((txSaude * (int)deltaTime.Hours) / 4);
-                felicidade = felicidade - ((txFelicidade * (int)deltaTime.Hours) / 4);
-                sono = sono + ((txSono * (int)deltaTime.Hours) / 4);
+                fome = fome - ((0.3 * txFome) / 15);//(int)deltaTime.Hours
+                saude = saude - ((0.3 * txSaude) / 15);//(int)deltaTime.Hours
+                felicidade = felicidade - ((0.3 * txFelicidade) / 15);//(int)deltaTime.Hours
+                sono = sono - ((0.3 * txSono) / 15);//(int)deltaTime.Hours
 
-                if (fome <= 0 || saude <= 0 || felicidade <= 0)
+                if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
                     estado = "morto";
                 }
@@ -158,7 +159,7 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "triste";
                 }
-                else if (sono > 80)
+                else if (sono < 20)
                 {
                     estado = "cansado";
                 }
@@ -167,12 +168,12 @@ namespace VitutalPet___Tamagotchi
             {
                 txFome = 1; txFelicidade = 7; txSaude = 6; txSono = 10;
 
-                fome = fome - ((txFome * (int)deltaTime.Hours) / 4);
-                saude = saude - ((txSaude * (int)deltaTime.Hours) / 4);
-                felicidade = felicidade - ((txFelicidade * (int)deltaTime.Hours) / 4);
-                sono = sono + ((txSono * (int)deltaTime.Hours) / 4);
+                fome = fome - ((0.3 * txFome) / 15);//(int)deltaTime.Hours
+                saude = saude - ((0.3 * txSaude) / 15);//(int)deltaTime.Hours
+                felicidade = felicidade - ((0.3 * txFelicidade) / 15);//(int)deltaTime.Hours
+                sono = sono - ((0.3 * txSono) / 15);//(int)deltaTime.Hours
 
-                if (fome <= 0 || saude <= 0 || felicidade <= 0)
+                if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
                     estado = "morto";
                 }
@@ -184,7 +185,7 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "triste";
                 }
-                if (sono < 25)
+                if (sono < 20)
                 {
                     estado = "cansado";
                 }
@@ -193,26 +194,18 @@ namespace VitutalPet___Tamagotchi
             {
                 txFome = 1; txFelicidade = 0; txSaude = 0; txSono = 5;
 
-                fome = fome - ((txFome * (int)deltaTime.Hours) / 4);
-                saude = saude + ((txSaude * (int)deltaTime.Hours) / 4);
-                felicidade = felicidade - ((txFelicidade * (int)deltaTime.Hours) / 4);
-                sono = sono - ((txSono * (int)deltaTime.Hours) / 4);
+                fome = fome - ((0.3 * txFome) / 50);//(int)deltaTime.Hours
+                saude = saude + ((0.3 * txSaude) / 15);//(int)deltaTime.Hours
+                felicidade = felicidade - ((0.3 * txFelicidade) / 50);//(int)deltaTime.Hours
+                sono = sono + ((0.3 * txSono) / 4);//(int)deltaTime.Hours
 
-                if (fome <= 0 || saude <= 0 || felicidade <= 0)
+                if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
                     estado = "morto";
                 }
-                if (saude < 25)
+                if (sono >= 100)
                 {
-                    estado = "doente";
-                }
-                if (felicidade < 25)
-                {
-                    estado = "triste";
-                }
-                if (sono > 80)
-                {
-                    estado = "cansado";
+                    estado = "normal";
                 }
             }
             else if (estado == "morto")
@@ -220,19 +213,17 @@ namespace VitutalPet___Tamagotchi
                 //txFome = 8000; txFelicidade = 8000; txSaude = 8000;
 
                 fome = 0;
+                sono = 0;
                 saude = 0;
                 felicidade = 0;
             }
             tempo.Text = DateTime.Now.Subtract(lastTime).ToString();
 
-            barra_sono.Attributes["style"] = "width: " + sono.ToString() + "%;";
-            barra_felicidade.Attributes["style"] = "width: " + felicidade.ToString() + "%;";
-            barra_fome.Attributes["style"] = "width: " + fome.ToString() + "%;";
-            barra_vida.Attributes["style"] = "width: " + saude.ToString() + "%;";
-            Update_Tamagotchi((int)fome, (int)saude, (int)felicidade, (int)sono, lastTime, estado, t, database);
+            Update_Tamagotchi(fome, saude, felicidade, sono, lastTime, estado, t, database);
+            Update_Bars(sono, felicidade, fome, saude);
         }
 
-        private void Update_Tamagotchi(int fome, int saude, int felicidade, int sono, DateTime lastTime, string estado, Tamagotchi t, IMongoDatabase database)
+        private void Update_Tamagotchi(double fome, double saude, double felicidade, double sono, DateTime lastTime, string estado, Tamagotchi t, IMongoDatabase database)
         {
             var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
 
@@ -269,8 +260,24 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            Update_Tamagotchi(fome + 7, saude - 3, felicidade + 4, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+
+            if (fome == 100)
+            {
+                saude -= 15; //DECREMENTO POR COMER SEM PRECISAO
+            }
+
+            fome += 7; saude -= 3; felicidade += 3;
+
+            if (fome > 100)
+                fome = 100;
+            if (saude < 0)
+                saude = 0;
+            if (felicidade > 100)
+                felicidade = 100;
+
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
         }
 
         public void Donuts(object sender, EventArgs e)
@@ -281,8 +288,24 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            Update_Tamagotchi(fome + 10, saude - 2, felicidade + 3, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+
+            if (fome == 100)
+            {
+                saude -= 15; //DECREMENTO POR COMER SEM PRECISAO
+            }
+
+            fome += 9; saude -= 2; felicidade += 3;
+
+            if (fome > 100)
+                fome = 100;
+            if (saude < 0)
+                saude = 0;
+            if (felicidade > 100)
+                felicidade = 100;
+
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
         }
 
         public void Frango(object sender, EventArgs e)
@@ -293,9 +316,25 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            Update_Tamagotchi(fome + 15, saude + 3, felicidade + 1, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+
+            if (fome == 100)
+            {
+                saude -= 20; //DECREMENTO POR COMER SEM PRECISAO
+            }
+            fome += 12; saude += 3; felicidade += 1;
+
+            if (fome > 100) //IFS PARA NÃO ESTRAPOLAR OS 100
+                fome = 100;
+            if (saude < 0)
+                saude = 0;
+            if (felicidade > 100)
+                felicidade = 100;
+
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
         }
+
 
         public void Sofa(object sender, EventArgs e)
         {
@@ -305,8 +344,10 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            Update_Tamagotchi(fome, saude + 15, felicidade, sono - 40, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+            saude += 5;    sono += 10;
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
         }
 
         public void Cama(object sender, EventArgs e)
@@ -317,8 +358,26 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            int fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+            var tLE = tamagotchi_Logged.Estado;
+            if (tLE == "normal" || tLE == "doente" || tLE == "cansado" || tLE == "sujo" || tLE == "triste")
+            {
+                //COLOCAR OS BAG Q APAGA A LUZ
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
+            }
+            else if (tLE == "dormindo")
+            {
+                //COLOCAR OS BAG Q ACENDE A LUZ
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+            }
+        }
+
+        private void Update_Bars(double sono, double felicidade, double fome, double saude)
+        {
+            barra_sono.Attributes["style"] = "width: " + (int)sono + "%;";
+            barra_felicidade.Attributes["style"] = "width: " + (int)felicidade + "%;";
+            barra_fome.Attributes["style"] = "width: " + (int)fome + "%;";
+            barra_vida.Attributes["style"] = "width: " + (int)saude + "%;";
         }
     }
 }

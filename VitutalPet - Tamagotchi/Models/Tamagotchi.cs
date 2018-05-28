@@ -12,10 +12,10 @@ namespace VitutalPet___Tamagotchi.Models
         public String Nome_Tamagotchi { get; set; }
         public String Nome_User { get; set; }
         public String Estado { get; set; }
-        public int Fome { get; set; }
-        public int Felicidade { get; set; }
-        public int Saude { get; set; }
-        public int Sono { get; set; }
+        public double Fome { get; set; }
+        public double Felicidade { get; set; }
+        public double Saude { get; set; }
+        public double Sono { get; set; }
         public DateTime Tempo { get; set; }
         public String Personagem { get; set; }
     }
