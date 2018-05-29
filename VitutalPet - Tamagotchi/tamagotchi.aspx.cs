@@ -293,8 +293,11 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            Update_Tamagotchi(fome, saude + 6, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude);
+            if (tamagotchi_Logged.Estado == "sujo") //SO LIMPA SE ESTIVER REALMENTE SUJO, SE Ñ, Ñ FAZ NADA
+            {
+                Update_Tamagotchi(fome, saude + 8, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude);
+            }
         }
 
         public void Malhar(object sender, EventArgs e)
@@ -373,7 +376,7 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome >= 100)
+            if (fome >= 99)
                 saude -= 23; //DECREMENTO POR COMER SEM PRECISAO
             else
                 fome += 12;
