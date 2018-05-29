@@ -19,14 +19,18 @@ namespace VitutalPet___Tamagotchi
         {
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("TesteTamagotchi");
+            String nome_UserLogged;
+            nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            
 
-            String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             string estado = tamagotchi_Logged.Estado;
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;        //indices do pet (definem o estado)
             Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, estado, tamagotchi_Logged, database);
         }
+        
+    
 
         public void OpenGameBoll(object sender, EventArgs e)
         {
@@ -57,7 +61,7 @@ namespace VitutalPet___Tamagotchi
             int txFome, txSaude, txFelicidade, txSono; //taxas de decaimento (muda de acordo com o estado)
 
             TimeSpan deltaTime = lastTime.Subtract(DateTime.Now);
-            test.Text = deltaTime.ToString();
+            //test.Text = deltaTime.ToString();
             
             if (estado == "normal")
             {
@@ -217,7 +221,7 @@ namespace VitutalPet___Tamagotchi
                 saude = 0;
                 felicidade = 0;
             }
-            tempo.Text = DateTime.Now.Subtract(lastTime).ToString();
+            //tempo.Text = DateTime.Now.Subtract(lastTime).ToString();
 
             Update_Tamagotchi(fome, saude, felicidade, sono, lastTime, estado, t, database);
             Update_Bars(sono, felicidade, fome, saude);
@@ -362,14 +366,18 @@ namespace VitutalPet___Tamagotchi
             var tLE = tamagotchi_Logged.Estado;
             if (tLE == "normal" || tLE == "doente" || tLE == "cansado" || tLE == "sujo" || tLE == "triste")
             {
-                //COLOCAR OS BAG Q APAGA A LUZ
+                back.Attributes["style"] = "background-image: url(/Person/background_dia.jpg)";
                 Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
             }
             else if (tLE == "dormindo")
             {
-                //COLOCAR OS BAG Q ACENDE A LUZ
+                back.Attributes["style"] = "background-image: url(/Person/background_noite.jpg)";
                 Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
             }
+        }
+        public void WatchYoutube (object sender, EventArgs e)
+        {
+            Response.Redirect("youtube.aspx");
         }
 
         private void Update_Bars(double sono, double felicidade, double fome, double saude)

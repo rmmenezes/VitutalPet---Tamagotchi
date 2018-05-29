@@ -90,26 +90,30 @@
     <Content Include="Global.asax" />
     <Content Include="inicial.aspx" />
     <Content Include="login.aspx" />
-    <Content Include="Person\background.jpg" />
-    <Content Include="Person\background1.jpg" />
+    <Content Include="Person\audio.mp3" />
+    <Content Include="Person\background_dia.jpg" />
+    <Content Include="Person\background_cine.jpg" />
+    <Content Include="Person\background_noite.jpg" />
     <Content Include="Person\Bart.JPG" />
-    <Content Include="Person\food1.png" />
-    <Content Include="Person\food2.png" />
-    <Content Include="Person\food3.gif" />
-    <Content Include="Person\food4.png" />
+    <Content Include="Person\Foods\food1.png" />
+    <Content Include="Person\Foods\food2.png" />
+    <Content Include="Person\Foods\food3.png" />
     <Content Include="Person\Homer.JPG" />
+    <Content Include="Person\Life\life1.png" />
+    <Content Include="Person\Life\life2.png" />
+    <Content Include="Person\Life\life3.png" />
     <Content Include="Person\Lisa.JPG" />
     <Content Include="Person\Maggie.JPG" />
     <Content Include="Person\Marge.JPG" />
     <Content Include="Person\Ned.JPG" />
-    <Content Include="Person\play1.jpg" />
-    <Content Include="Person\play2.jpg" />
-    <Content Include="Person\play3.jpg" />
-    <Content Include="Person\sleep1.jpg" />
-    <Content Include="Person\sleep2.png" />
+    <Content Include="Person\Play\play1.png" />
+    <Content Include="Person\Play\play2.png" />
+    <Content Include="Person\Sleep\sleep1.png" />
+    <Content Include="Person\Sleep\sleep2.png" />
     <Content Include="Person\wallpaper.jpg" />
     <Content Include="tamagotchi.aspx" />
     <Content Include="Web.config" />
+    <Content Include="youtube.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="game1.aspx.cs">
@@ -146,6 +150,13 @@
     </Compile>
     <Compile Include="tamagotchi.aspx.designer.cs">
       <DependentUpon>tamagotchi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="youtube.aspx.cs">
+      <DependentUpon>youtube.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="youtube.aspx.designer.cs">
+      <DependentUpon>youtube.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
