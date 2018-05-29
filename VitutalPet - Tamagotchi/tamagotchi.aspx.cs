@@ -76,15 +76,15 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "morto";
                 }
-                else if (saude < 25)
+                else if (saude < 35)
                 {
                     estado = "doente";
                 }
-                else if (felicidade < 25)
+                else if (felicidade < 35)
                 {
                     estado = "triste";
                 }
-                else if (sono < 20)
+                else if (sono < 25)
                 {
                     estado = "cansado";
                 }
@@ -103,15 +103,15 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "morto";
                 }
-                else if (saude < 25)
+                else if (saude < 35)
                 {
                     estado = "doente";
                 }
-                else if (felicidade < 25)
+                else if (felicidade < 35)
                 {
                     estado = "triste";
                 }
-                else if (sono < 20)
+                else if (sono < 25)
                 {
                     estado = "cansado";
                 }
@@ -129,15 +129,15 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "morto";
                 }
-                else if (saude < 25)
+                else if (saude < 35)
                 {
                     estado = "doente";
                 }
-                else if (felicidade < 25)
+                else if (felicidade < 35)
                 {
                     estado = "triste";
                 }
-                else if (sono < 20)
+                else if (sono < 25)
                 {
                     estado = "cansado";
                 }
@@ -155,15 +155,15 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "morto";
                 }
-                else if (saude < 25)
+                else if (saude < 35)
                 {
                     estado = "doente";
                 }
-                else if (felicidade < 25)
+                else if (felicidade < 35)
                 {
                     estado = "triste";
                 }
-                else if (sono < 20)
+                else if (sono < 25)
                 {
                     estado = "cansado";
                 }
@@ -181,15 +181,15 @@ namespace VitutalPet___Tamagotchi
                 {
                     estado = "morto";
                 }
-                if (saude < 25)
+                else if (saude < 35)
                 {
                     estado = "doente";
                 }
-                if (felicidade < 25)
+                else if (felicidade < 35)
                 {
                     estado = "triste";
                 }
-                if (sono < 20)
+                else if (sono < 25)
                 {
                     estado = "cansado";
                 }
@@ -256,6 +256,61 @@ namespace VitutalPet___Tamagotchi
                 return null;
             }
         }
+
+        public void Remedio(object sender, EventArgs e)
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("TesteTamagotchi");
+
+            String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+
+            if (saude >= 99)
+            {
+                saude -= 80;    //PENALIDADE POR SE MEDICAR SEM NECESSIDADE
+            }
+            else
+                saude += 65; felicidade += 3;
+
+            if (saude >= 100)
+                saude = 100;
+            if (felicidade >= 100)
+                felicidade = 100;
+
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
+        }
+
+        public void Banho(object sender, EventArgs e)
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("TesteTamagotchi");
+
+            String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+
+            Update_Tamagotchi(fome, saude + 6, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
+        }
+
+        public void Malhar(object sender, EventArgs e)
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("TesteTamagotchi");
+
+            String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+
+            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+
+            Update_Tamagotchi(fome - 7, saude + 10, felicidade, sono - 12, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
+        }
+
         public void Cerveja(object sender, EventArgs e)
         {
             var client = new MongoClient("mongodb://localhost:27017");
@@ -266,12 +321,10 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome == 100)
-            {
-                saude -= 15; //DECREMENTO POR COMER SEM PRECISAO
-            }
-
-            fome += 7; saude -= 3; felicidade += 3;
+            if (fome >= 100)
+                saude -= 17; //DECREMENTO POR COMER SEM PRECISAO
+            else
+                fome += 7; saude -= 5; felicidade += 5;
 
             if (fome > 100)
                 fome = 100;
@@ -280,7 +333,7 @@ namespace VitutalPet___Tamagotchi
             if (felicidade > 100)
                 felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude);
         }
 
@@ -294,12 +347,10 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome == 100)
-            {
-                saude -= 15; //DECREMENTO POR COMER SEM PRECISAO
-            }
-
-            fome += 9; saude -= 2; felicidade += 3;
+            if (fome >= 100)
+                saude -= 18; //DECREMENTO POR COMER SEM PRECISAO
+            else
+                fome += 9; saude -= 2; felicidade += 3;
 
             if (fome > 100)
                 fome = 100;
@@ -308,7 +359,7 @@ namespace VitutalPet___Tamagotchi
             if (felicidade > 100)
                 felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude);
         }
 
@@ -322,20 +373,15 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome == 100)
-            {
-                saude -= 20; //DECREMENTO POR COMER SEM PRECISAO
-            }
-            fome += 12; saude += 3; felicidade += 1;
+            if (fome >= 100)
+                saude -= 23; //DECREMENTO POR COMER SEM PRECISAO
+            else
+                fome += 12;
 
             if (fome > 100) //IFS PARA NÃO ESTRAPOLAR OS 100
                 fome = 100;
-            if (saude < 0)
-                saude = 0;
-            if (felicidade > 100)
-                felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude);
         }
 
@@ -349,7 +395,7 @@ namespace VitutalPet___Tamagotchi
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            saude += 5;    sono += 10;
+            saude += 3; sono += 6;
             Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude);
         }
@@ -364,14 +410,14 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
             var tLE = tamagotchi_Logged.Estado;
-            if (tLE == "normal" || tLE == "doente" || tLE == "cansado" || tLE == "sujo" || tLE == "triste")
-            {
-                back.Attributes["style"] = "background-image: url(/Person/background_dia.jpg)";
-                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
-            }
-            else if (tLE == "dormindo")
+            if (tLE == "normal" || tLE == "doente" || tLE == "cansado" || tLE == "sujo" || tLE == "triste") //SE ESTA EM QUALQUER ESTADO ACORDADO, ENTAO DORME
             {
                 back.Attributes["style"] = "background-image: url(/Person/background_noite.jpg)";
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
+            }
+            else if (tLE == "dormindo")   //SE ESTIVER DORMINDO, ENTÃO ACORDA
+            {
+                back.Attributes["style"] = "background-image: url(/Person/background_dia.jpg)";
                 Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
             }
         }

@@ -55,9 +55,9 @@
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-warning" id="barra_vida" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                 </div>
-                                <asp:ImageButton ImageUrl="/Person/Life/life1.png" runat="server" CssClass="img-circle active" Width="50" Height="50" />
-                                <asp:ImageButton ImageUrl="/Person/Life/life2.png" runat="server" CssClass="img-circle active" Width="50" Height="50" />
-                                <asp:ImageButton ImageUrl="/Person/Life/life3.png" runat="server" CssClass="img-circle active" Width="50" Height="50" />
+                                <asp:ImageButton ImageUrl="/Person/Life/life1.png" runat="server" OnClick="Remedio" CssClass="img-circle active" Width="50" Height="50" />
+                                <asp:ImageButton ImageUrl="/Person/Life/life2.png" runat="server" OnClick="Banho" CssClass="img-circle active" Width="50" Height="50" />
+                                <asp:ImageButton ImageUrl="/Person/Life/life3.png" runat="server" OnClick="Malhar" CssClass="img-circle active" Width="50" Height="50" />
                             </div>
 
                             <div class="col-md-3" style="text-align: center">
