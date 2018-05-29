@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="refresh" content="5000" />
+    <meta http-equiv="refresh" content="500" />
     <title>VIRTUAL PET</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet" />
     <!-- font-family: 'Chewy', cursive; -->
-    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet" />
     <!-- font-family: 'Fredoka One', cursive; -->
     <link rel="stylesheet" href="css/homer.css" />
     <link rel="stylesheet" href="css/lisa.css" />
@@ -32,7 +32,7 @@
 
 
 </head>
-<body id="back" runat="server" style="background-color: white">
+<body runat="server" id="ola" style="background-image: url(/Person/background_dia.jpg)">
     <form id="form1" runat="server">
         <div>
             <nav class="navbar navbar-default">
@@ -44,16 +44,19 @@
                 </div>
             </nav>
             <%= Homer() %>
+
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:Timer ID="Timer1" runat="server" Interval="1000"></asp:Timer>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="container">
+                    <div class="container" id="back" runat="server" style="">
+                                <asp:Label Text="estado_label" ID="estado_label" Style="font-family: 'Fredoka One', cursive; font-size: 20px;" runat="server" />
+                        <br />
                         <div class="row">
                             <div class="col-md-3" style="text-align: center">
                                 <h3 style="font-family: 'Fredoka One', cursive; font-size: 22px;">Vitalidade</h3>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning" id="barra_vida" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                    <div class="progress-bar progress-bar-success" id="barra_vida" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                 </div>
                                 <asp:ImageButton ImageUrl="/Person/Life/life1.png" runat="server" OnClick="Remedio" CssClass="img-circle active" Width="50" Height="50" />
                                 <asp:ImageButton ImageUrl="/Person/Life/life2.png" runat="server" OnClick="Banho" CssClass="img-circle active" Width="50" Height="50" />
@@ -63,7 +66,7 @@
                             <div class="col-md-3" style="text-align: center">
                                 <h3 style="font-family: 'Fredoka One', cursive; font-size: 22px;">Alimentação</h3>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning" id="barra_fome" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                    <div class="progress-bar progress-bar-danger" id="barra_fome" runat="server" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                 </div>
                                 <asp:ImageButton ImageUrl="/Person/Foods/food1.png" runat="server" OnClick="Donuts" CssClass="img-circle active" Width="50" Height="50" />
                                 <asp:ImageButton ImageUrl="/Person/Foods/food2.png" runat="server" OnClick="Frango" CssClass="img-circle active" Width="50" Height="50" />
@@ -73,21 +76,22 @@
                             <div class="col-md-3" style="text-align: center">
                                 <h3 style="font-family: 'Fredoka One', cursive; font-size: 22px;">Energia</h3>
                                 <div class="progress">
-                                    <div runat="server" class="progress-bar" id="barra_sono" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                    <div runat="server" class="progress-bar progress-bar-warning" id="barra_sono" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                 </div>
-                                <asp:ImageButton ImageUrl="/Person/Sleep/sleep1.png" runat="server" OnClick="Cama" CssClass="img-circle active" Width="50" Height="50" />
+                                <asp:ImageButton ImageUrl="/Person/Sleep/sleep1.png" id="dormir" runat="server" OnClick="Cama" CssClass="img-circle active" Width="50" Height="50" />
                                 <asp:ImageButton ImageUrl="/Person/Sleep/sleep2.png" runat="server" OnClick="Sofa" CssClass="img-circle active" Width="50" Height="50" />
                             </div>
 
                             <div class="col-md-3" style="text-align: center">
                                 <h3 style="font-family: 'Fredoka One', cursive; font-size: 22px;">Felicidade</h3>
                                 <div class="progress">
-                                    <div runat="server" id="barra_felicidade" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                    <div runat="server" id="barra_felicidade" class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                 </div>
                                 <asp:ImageButton ImageUrl="/Person/Play/play1.png" runat="server" OnClick="OpenGameBoll" CssClass="img-circle active" Width="50" Height="50" />
                                 <asp:ImageButton ImageUrl="/Person/Play/play2.png" runat="server" OnClick="WatchYoutube" CssClass="img-circle active" Width="50" Height="50" />
                             </div>
                         </div>
+                        &nbsp;
                     </div>
                 </ContentTemplate>
                 <Triggers>

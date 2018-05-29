@@ -106,6 +106,8 @@
     <Content Include="Person\Maggie.JPG" />
     <Content Include="Person\Marge.JPG" />
     <Content Include="Person\Ned.JPG" />
+    <Content Include="Person\off.png" />
+    <Content Include="Person\on.png" />
     <Content Include="Person\Play\play1.png" />
     <Content Include="Person\Play\play2.png" />
     <Content Include="Person\Sleep\sleep1.png" />

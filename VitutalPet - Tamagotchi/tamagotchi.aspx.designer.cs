@@ -13,13 +13,13 @@ namespace VitutalPet___Tamagotchi {
     public partial class tamagotchi {
         
         /// <summary>
-        /// Controle back.
+        /// Controle ola.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl back;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ola;
         
         /// <summary>
         /// Controle form1.
@@ -58,6 +58,24 @@ namespace VitutalPet___Tamagotchi {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
+        /// Controle back.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl back;
+        
+        /// <summary>
+        /// Controle estado_label.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label estado_label;
+        
+        /// <summary>
         /// Controle barra_vida.
         /// </summary>
         /// <remarks>
@@ -83,6 +101,15 @@ namespace VitutalPet___Tamagotchi {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl barra_sono;
+        
+        /// <summary>
+        /// Controle dormir.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton dormir;
         
         /// <summary>
         /// Controle barra_felicidade.
