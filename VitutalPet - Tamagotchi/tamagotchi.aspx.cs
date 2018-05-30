@@ -267,20 +267,21 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (saude >= 99)
+            if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE FAZER COISAS DORMINDO
             {
-                saude -= 80;    //PENALIDADE POR SE MEDICAR SEM NECESSIDADE
+                if (saude >= 99)
+                    saude -= 80;    //PENALIDADE POR SE MEDICAR SEM NECESSIDADE
+                else
+                    saude += 65; felicidade += 3;
+
+                if (saude > 100)
+                    saude = 100;
+                if (felicidade > 100)
+                    felicidade = 100;
+
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude);
             }
-            else
-                saude += 65; felicidade += 3;
-
-            if (saude >= 100)
-                saude = 100;
-            if (felicidade >= 100)
-                felicidade = 100;
-
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude);
         }
 
         public void Banho(object sender, EventArgs e)
@@ -295,9 +296,20 @@ namespace VitutalPet___Tamagotchi
 
             if (tamagotchi_Logged.Estado == "sujo") //SO LIMPA SE ESTIVER REALMENTE SUJO, SE Ñ, Ñ FAZ NADA
             {
-                Update_Tamagotchi(fome, saude + 8, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
-                Update_Bars(sono, felicidade, fome, saude);
+                saude += 8; felicidade += 2;
+                if (saude > 100)
+                    saude = 100;
+                if (felicidade > 100)
+                    felicidade = 100;
             }
+            else
+            {
+                felicidade -= 7;   //PENALIDADE POR TOMAR BANHO SEM PRECISAR
+                if (felicidade < 0)
+                    felicidade = 0;
+            }
+            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+            Update_Bars(sono, felicidade, fome, saude);
         }
 
         public void Malhar(object sender, EventArgs e)
@@ -310,8 +322,20 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            Update_Tamagotchi(fome - 7, saude + 10, felicidade, sono - 12, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude);
+            if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE FAZER COISAS DORMINDO
+            {
+                saude += 10; fome -= 7; sono -= 12;
+
+                if (saude > 100)    //PARA NAO ESTRAPOLAR 100
+                    saude = 100;
+                if (fome < 0)       //PARA NAO ESTRAPOLAR 0
+                    fome = 0;
+                if (sono < 0)
+                    sono = 0;
+
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude);
+            }
         }
 
         public void Cerveja(object sender, EventArgs e)
@@ -324,20 +348,23 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome >= 100)
-                saude -= 17; //DECREMENTO POR COMER SEM PRECISAO
-            else
-                fome += 7; saude -= 5; felicidade += 5;
+            if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
+            {
+                if (fome >= 99)
+                    saude -= 17; //PENALIDADE POR COMER SEM PRECISAO
+                else
+                    fome += 7; saude -= 5; felicidade += 5;
 
-            if (fome > 100)
-                fome = 100;
-            if (saude < 0)
-                saude = 0;
-            if (felicidade > 100)
-                felicidade = 100;
+                if (fome > 100)
+                    fome = 100;
+                if (saude < 0)
+                    saude = 0;
+                if (felicidade > 100)
+                    felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude);
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude);
+            }
         }
 
         public void Donuts(object sender, EventArgs e)
@@ -350,20 +377,23 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome >= 100)
-                saude -= 18; //DECREMENTO POR COMER SEM PRECISAO
-            else
-                fome += 9; saude -= 2; felicidade += 3;
+            if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
+            {
+                if (fome >= 99)
+                    saude -= 18; //PENALIDADE POR COMER SEM PRECISAO
+                else
+                    fome += 9; saude -= 2; felicidade += 3;
 
-            if (fome > 100)
-                fome = 100;
-            if (saude < 0)
-                saude = 0;
-            if (felicidade > 100)
-                felicidade = 100;
+                if (fome > 100)
+                    fome = 100;
+                if (saude < 0)
+                    saude = 0;
+                if (felicidade > 100)
+                    felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude);
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude);
+            }
         }
 
         public void Frango(object sender, EventArgs e)
@@ -376,16 +406,23 @@ namespace VitutalPet___Tamagotchi
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            if (fome >= 99)
-                saude -= 23; //DECREMENTO POR COMER SEM PRECISAO
-            else
-                fome += 12;
-
-            if (fome > 100) //IFS PARA NÃO ESTRAPOLAR OS 100
-                fome = 100;
-
+            if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
+            {
+                if (fome >= 99)
+                {
+                    saude -= 23; //PENALIDADE NA SAUDE POR COMER SEM PRECISAO
+                    if (saude < 0)  //IF PARA NAO ESTRAPOLAR NEGATIVAMENTE
+                        saude = 0;
+                }
+                else
+                {
+                    fome += 12;
+                    if (fome > 100) //IF PARA NÃO ESTRAPOLAR OS 100
+                        fome = 100;
+                }
             Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude);
+            }
         }
 
 
@@ -398,9 +435,19 @@ namespace VitutalPet___Tamagotchi
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            saude += 3; sono += 6;
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude);
+
+            if (tamagotchi_Logged.Estado != "dormindo")
+            {
+                saude += 2; sono += 5;
+
+                if (saude > 100)
+                    saude = 100;
+                if (sono > 100)
+                    sono = 100;
+
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude);
+            }
         }
 
         public void Cama(object sender, EventArgs e)
@@ -412,16 +459,16 @@ namespace VitutalPet___Tamagotchi
             Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            var tLE = tamagotchi_Logged.Estado;
-            if (tLE == "normal" || tLE == "doente" || tLE == "cansado" || tLE == "sujo" || tLE == "triste") //SE ESTA EM QUALQUER ESTADO ACORDADO, ENTAO DORME
+
+            if (tamagotchi_Logged.Estado != "dormindo") //SE ESTA EM QUALQUER ESTADO ACORDADO, ENTAO...
             {
                 back.Attributes["style"] = "background-image: url(/Person/background_noite.jpg)";
-                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);  //...DORME
             }
-            else if (tLE == "dormindo")   //SE ESTIVER DORMINDO, ENTÃO ACORDA
+            else  //SE ESTIVER DORMINDO, ENTÃO...
             {
                 back.Attributes["style"] = "background-image: url(/Person/background_dia.jpg)";
-                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);    //...ACORDA
             }
         }
         public void WatchYoutube (object sender, EventArgs e)
