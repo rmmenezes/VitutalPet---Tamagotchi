@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,30 @@ namespace VitutalPet___Tamagotchi.Models
         public ObjectId Id { get; set; }
         public String Username { get; set; }
         public String Password { get; set; }
-        public List<Tamagotchi> List { get; set; }
+
+        public User CreateUser(string nome, string password)
+        {
+            var CollectionUser = new DatabaseConnection().GetUserCollection();
+            User u = new User
+            {
+                Username = nome,
+                Password = password
+            };
+            CollectionUser.InsertOne(u);
+            return u;
+        }
+
+        public User Verifica(IMongoCollection<User> users, string username, string password)
+        {
+            var res = users.Find(x => x.Username == username && x.Password == password);
+            if (res.Count() != 0)
+            {
+                return res.ToList().First();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

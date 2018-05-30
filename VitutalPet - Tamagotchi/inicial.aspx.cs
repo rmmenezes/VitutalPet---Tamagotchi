@@ -15,49 +15,18 @@ namespace VitutalPet___Tamagotchi
         protected void Page_Load(object sender, EventArgs e)
         {
             bemvindo.Text = "Bem Vindo " + Session["Auth"].ToString();
-
         }
 
         public void Tamagotchiadd(object sender, EventArgs e)
         {
-            string nome = nomePet.Text;
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-            var users = database.GetCollection<User>("user");
-            var tam = database.GetCollection<Tamagotchi>("tamagotchi");
-
             var UserLogged = Session["Auth"];
-            
-            Tamagotchi t = CreateTamagotchi(tam, nome, personagem.Text, UserLogged.ToString());
+            string NomeTamagotchi = nomePet.Text;
+            string PersonagemEscolhido = personagem.Text;
+            Tamagotchi t = new Tamagotchi().CreateTamagotchi(UserLogged.ToString(), NomeTamagotchi, PersonagemEscolhido);
             Session["Personagem"] = personagem.Text;
             Response.Redirect("tamagotchi.aspx");
         }
-
-        //public void HomerSelect(object sender, EventArgs e)
-        //{
-            //Btn_homer.BackColor = System.Drawing.Color.Red;
-        //}
-
-        private Tamagotchi CreateTamagotchi(IMongoCollection<Tamagotchi> tam, string nome, string personagem, string nome_User)
-        {
-            Tamagotchi t = new Tamagotchi();
-
-            t.Nome_User = nome_User;
-            t.Nome_Tamagotchi = nome;
-            t.Saude = 100.00;
-            t.Sono = 100.00;
-            t.Fome = 100.00;
-            t.Felicidade = 100.00;
-            t.Estado = "normal";
-            t.Tempo = DateTime.Now;
-            t.Personagem = personagem;
-
-            //insere na minha collection (tabela) -> tamagotchi 
-            tam.InsertOne(t);
-
-            return t;
-        }
-
+     
         protected void SelectPersonagem(object sender, ImageClickEventArgs e)
         {
             var imageButton = sender as ImageButton;
@@ -87,6 +56,5 @@ namespace VitutalPet___Tamagotchi
                 personagem.Text = "Ned";
             }
         }
-
     }
 }

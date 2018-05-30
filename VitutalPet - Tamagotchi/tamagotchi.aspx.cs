@@ -9,29 +9,22 @@ using VitutalPet___Tamagotchi.Models;
 
 namespace VitutalPet___Tamagotchi
 {
-
-
-
     public partial class tamagotchi : System.Web.UI.Page
     {
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged;
             nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             
-
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             string estado = tamagotchi_Logged.Estado;
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;        //indices do pet (definem o estado)
             Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, estado, tamagotchi_Logged, database);
         }
         
-    
-
         public void OpenGameBoll(object sender, EventArgs e)
         {
             Response.Redirect("game1.aspx");
@@ -223,48 +216,17 @@ namespace VitutalPet___Tamagotchi
             }
             //tempo.Text = DateTime.Now.Subtract(lastTime).ToString();
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, lastTime, estado, t, database);
+            var nuncanemvi = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, lastTime, estado, t, database);
             Update_Bars(sono, felicidade, fome, saude, estado);
         }
 
-        private void Update_Tamagotchi(double fome, double saude, double felicidade, double sono, DateTime lastTime, string estado, Tamagotchi t, IMongoDatabase database)
-        {
-            var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
-
-            var filtro = Builders<Tamagotchi>.Filter.Where(x => x.Nome_Tamagotchi == t.Nome_Tamagotchi);
-
-            var change = Builders<Tamagotchi>.Update.Set(x => x.Estado, estado)
-                                                    .Set(x => x.Fome, fome)
-                                                    .Set(x => x.Saude, saude)
-                                                    .Set(x => x.Felicidade, felicidade)
-                                                    .Set(x => x.Sono, sono)
-                                                    .Set(x => x.Tempo, lastTime);
-
-            tamagotchis.UpdateOne(filtro, change);
-        }
-
-        private Tamagotchi Get_tamagotchi(IMongoDatabase database, string nome_UserLogged)
-        {
-            var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
-            var res = tamagotchis.Find(x => x.Nome_User == nome_UserLogged);
-            if (res.Count() != 0)
-            {
-                return res.ToList().First();
-            }
-            else
-            {
-                return null;
-            }
-        }
+        
 
         public void Remedio(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
-
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
             if (saude >= 99)
@@ -279,45 +241,39 @@ namespace VitutalPet___Tamagotchi
             if (felicidade >= 100)
                 felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
         public void Banho(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            Update_Tamagotchi(fome, saude + 6, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude + 6, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
         public void Malhar(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            Update_Tamagotchi(fome - 7, saude + 10, felicidade, sono - 12, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome - 7, saude + 10, felicidade, sono - 12, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
         public void Cerveja(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
@@ -333,17 +289,15 @@ namespace VitutalPet___Tamagotchi
             if (felicidade > 100)
                 felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
         public void Donuts(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
@@ -359,17 +313,15 @@ namespace VitutalPet___Tamagotchi
             if (felicidade > 100)
                 felicidade = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
         public void Frango(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
@@ -381,44 +333,40 @@ namespace VitutalPet___Tamagotchi
             if (fome > 100) //IFS PARA NÃO ESTRAPOLAR OS 100
                 fome = 100;
 
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
 
         public void Sofa(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
             saude += 3; sono += 6;
-            Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
         public void Cama(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-
+            var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
             var tLE = tamagotchi_Logged.Estado;
             if (tLE == "normal" || tLE == "doente" || tLE == "cansado" || tLE == "sujo" || tLE == "triste") //SE ESTA EM QUALQUER ESTADO ACORDADO, ENTAO DORME
             {
                 dormir.ImageUrl = "/Person/off.png";
-                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
+                tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "dormindo", tamagotchi_Logged, database);
             }
             else if (tLE == "dormindo")   //SE ESTIVER DORMINDO, ENTÃO ACORDA
             {
                 dormir.ImageUrl = "/Person/on.png";
-                Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+                tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
             }
         }
         public void WatchYoutube (object sender, EventArgs e)

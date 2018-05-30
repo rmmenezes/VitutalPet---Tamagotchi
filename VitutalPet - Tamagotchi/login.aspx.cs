@@ -13,22 +13,15 @@ namespace VitutalPet___Tamagotchi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           // pronto agora sim
+
         }
 
         public void Btn_Entrar(object sender, EventArgs e)
         {
             String user = username.Text;
             String pass = password.Text;
-            
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-            var users = database.GetCollection<User>("user");
-            var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
-
-            User UserLogged = Verifica(users, user, pass);
-            
-
+            var CollectionUser = new DatabaseConnection().GetUserCollection();
+            User UserLogged = new User().Verifica(CollectionUser,user,pass);
 
             if ( UserLogged != null)
             {
@@ -37,46 +30,15 @@ namespace VitutalPet___Tamagotchi
             }
             else
             {
-                //Implementar caso de erro.
+                Response.Redirect("login.aspx");
             }
-
         }
-
 
         public void Btn_Cadastrar(object sender, EventArgs e)
         {
             String user = username.Text;
             String pass = password.Text;
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TesteTamagotchi");
-            var users = database.GetCollection<User>("user");
-            var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
-
-            CreateUser(users, user, pass);
+            var NewUser = new User().CreateUser(user, pass);
         }
-
-
-        public void CreateUser(IMongoCollection<User> users, string username, string password)
-        {
-            User u = new User() { Username = username, Password = password };
-            users.InsertOne(u);
-        }
-
-        public User Verifica(IMongoCollection<User> users, string username, string password)
-        {
-            var res = users.Find(x => x.Username == username && x.Password == password);
-            if (res.Count() != 0)
-            {
-                return res.ToList().First();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-
-        
-
     }
 }

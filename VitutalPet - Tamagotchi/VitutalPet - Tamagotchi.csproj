@@ -118,6 +118,7 @@
     <Content Include="youtube.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="game1.aspx.cs">
       <DependentUpon>game1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -132,7 +133,6 @@
     <Compile Include="inicial.aspx.designer.cs">
       <DependentUpon>inicial.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Models\BDconect.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
