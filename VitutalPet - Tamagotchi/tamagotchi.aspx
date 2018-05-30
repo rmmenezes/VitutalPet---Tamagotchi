@@ -49,7 +49,7 @@
             <asp:Timer ID="Timer1" runat="server" Interval="1000"></asp:Timer>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="container" id="back" runat="server" style="">
+                    <div class="container">
                                 <asp:Label Text="estado_label" ID="estado_label" Style="font-family: 'Fredoka One', cursive; font-size: 20px;" runat="server" />
                         <br />
                         <div class="row">
