@@ -1,6 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="game1.aspx.cs" Inherits="VitutalPet___Tamagotchi.game1" %>
 
 <!DOCTYPE html>
+
+<audio autoplay loop id="audio4">
+  <source src="/Person/audio4.mp3">
+</audio>
 <html>
     <head>
         <title></title>

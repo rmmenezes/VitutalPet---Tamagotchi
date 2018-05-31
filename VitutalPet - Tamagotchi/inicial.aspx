@@ -2,6 +2,9 @@
 
 <!DOCTYPE html>
 
+<audio autoplay loop id="audio2">
+  <source src="/Person/audio2.mp3">
+</audio>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>

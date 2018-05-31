@@ -229,10 +229,10 @@ namespace VitutalPet___Tamagotchi
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
-            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE FAZER COISAS DORMINDO
             {
+                double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
                 if (saude >= 99)
                     saude -= 80;    //PENALIDADE POR SE MEDICAR SEM NECESSIDADE
                 else
@@ -243,7 +243,7 @@ namespace VitutalPet___Tamagotchi
                 if (felicidade > 100)
                     felicidade = 100;
 
-                var nunca = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+                var nunca = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
                 Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
                 
             }
@@ -255,7 +255,24 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            tamagotchi_Logged.Update_Tamagotchi(fome, saude + 6, felicidade + 2, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+
+
+            if (tamagotchi_Logged.Estado == "sujo")
+            {
+                saude += 6; felicidade += 2;
+                if (saude > 100)
+                    saude = 100;
+                if (felicidade > 100)
+                    felicidade = 100;
+                tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "normal", tamagotchi_Logged, database);
+            }
+            else if (tamagotchi_Logged.Estado != "dormindo")
+            {
+                felicidade -= 3;
+                if (felicidade < 0)
+                    felicidade = 0;
+                tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            }
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
         }
 
@@ -265,10 +282,22 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
-            tamagotchi_Logged.Update_Tamagotchi(fome - 7, saude + 10, felicidade, sono - 12, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+            if (tamagotchi_Logged.Estado != "dormindo")
+            {
+                double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+                fome -= 7; saude += 10; sono -= 12;
+                if (fome < 0)
+                    fome = 0;
+                if (saude > 100)
+                    saude = 100;
+                if (sono < 0)
+                    sono = 0;
+
+            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
             Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
+            }
+
         }
 
         public void Cerveja(object sender, EventArgs e)
@@ -277,10 +306,9 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
             {
+                double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
                 if (fome >= 99)
                     saude -= 17; //PENALIDADE POR COMER SEM PRECISAO
                 else
@@ -296,8 +324,6 @@ namespace VitutalPet___Tamagotchi
                 tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
                 Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
             }
-
-
         }
 
         public void Donuts(object sender, EventArgs e)
@@ -306,10 +332,9 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
             {
+                double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
                 if (fome >= 99)
                     saude -= 18; //PENALIDADE POR COMER SEM PRECISAO
                 else
@@ -324,9 +349,7 @@ namespace VitutalPet___Tamagotchi
 
                 tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
                 Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
-           
             }
-
         }
 
         public void Frango(object sender, EventArgs e)
@@ -335,18 +358,19 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+            if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
+            {
+                double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+                if (fome >= 99)
+                    saude -= 23; //DECREMENTO POR COMER SEM PRECISAO
+                else
+                    fome += 12;
+                if (fome > 100) //IFS PARA NÃO ESTRAPOLAR OS 100
+                    fome = 100;
 
-            if (fome >= 100)
-                saude -= 23; //DECREMENTO POR COMER SEM PRECISAO
-            else
-                fome += 12;
-
-            if (fome > 100) //IFS PARA NÃO ESTRAPOLAR OS 100
-                fome = 100;
-
-            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
+                tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado = "sujo", tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
+            }
         }
 
         public void Sofa(object sender, EventArgs e)
@@ -355,10 +379,18 @@ namespace VitutalPet___Tamagotchi
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
             Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
 
-            double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
-            saude += 3; sono += 6;
-            tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
-            Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
+            if (tamagotchi_Logged.Estado != "dormindo") //SE ESTA EM QUALQUER ESTADO ACORDADO, ENTAO...
+            {
+                double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
+                saude += 3; sono += 3;
+                if (saude > 100)
+                    saude = 100;
+                if (sono > 100)
+                    sono = 100;
+
+                tamagotchi_Logged.Update_Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Estado, tamagotchi_Logged, database);
+                Update_Bars(sono, felicidade, fome, saude, tamagotchi_Logged.Estado);
+            }
         }
 
         public void Cama(object sender, EventArgs e)

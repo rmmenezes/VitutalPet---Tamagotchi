@@ -86,6 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="audio2.mp3" />
     <Content Include="game1.aspx" />
     <Content Include="Global.asax" />
     <Content Include="inicial.aspx" />

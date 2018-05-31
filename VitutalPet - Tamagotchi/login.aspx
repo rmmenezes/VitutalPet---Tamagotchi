@@ -1,6 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="VitutalPet___Tamagotchi.login" %>
 
 <!DOCTYPE html>
+
+<audio autoplay loop id="audio">
+  <source src="/Person/audio.mp3">
+</audio>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
