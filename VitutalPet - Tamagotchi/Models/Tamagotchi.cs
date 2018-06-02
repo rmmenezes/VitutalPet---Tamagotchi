@@ -19,8 +19,9 @@ namespace VitutalPet___Tamagotchi.Models
         public double Sono { get; set; }
         public DateTime Tempo { get; set; }
         public String Personagem { get; set; }
+        public int Nivel { get; set; }
 
-        public Tamagotchi CreateTamagotchi(string nome_User, string nome_Tamagotchi, string personagem)
+        public Tamagotchi CreateTamagotchi(string nome_User, string nome_Tamagotchi, string personagem, int nivel)
         {
             var CollectionTamagotchi = new DatabaseConnection().GetTamagotchiCollection();
             Tamagotchi t = new Tamagotchi()
@@ -33,7 +34,8 @@ namespace VitutalPet___Tamagotchi.Models
                 Felicidade = 100.00,
                 Estado = "normal",
                 Tempo = DateTime.Now,
-                Personagem = personagem
+                Personagem = personagem,
+                Nivel = nivel,
             };
             CollectionTamagotchi.InsertOne(t);
             return t;
@@ -46,6 +48,20 @@ namespace VitutalPet___Tamagotchi.Models
             if (res.Count() != 0)
             {
                 return res.ToList().First();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<Tamagotchi> Get_tamagotchi_List(string nome_UserLogged)
+        {
+            var tamagotchis = new DatabaseConnection().GetTamagotchiCollection();
+            var res = tamagotchis.Find(x => x.Nome_User == nome_UserLogged);
+            if (res.Count() != 0)
+            {
+                return res.ToList();
             }
             else
             {
@@ -67,5 +83,6 @@ namespace VitutalPet___Tamagotchi.Models
             return t;
         }
 
+      
     }
 }
