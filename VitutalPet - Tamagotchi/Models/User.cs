@@ -21,8 +21,28 @@ namespace VitutalPet___Tamagotchi.Models
                 Username = nome,
                 Password = password
             };
-            CollectionUser.InsertOne(u);
-            return u;
+            if (NuncaLogado(CollectionUser, nome, password))
+            {
+                CollectionUser.InsertOne(u);
+                return u;
+            }
+            else
+            {
+                return null;
+
+            }
+        }
+
+        public bool NuncaLogado(IMongoCollection<User> CollectionUser ,string nome, string password)
+        {
+            if( Verifica(CollectionUser, nome, password) == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public User Verifica(IMongoCollection<User> users, string username, string password)

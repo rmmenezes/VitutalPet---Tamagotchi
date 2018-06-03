@@ -16,9 +16,13 @@ namespace VitutalPet___Tamagotchi
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged;
             nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            var tamagotchinome = Request.QueryString["tamagotchinome"].ToString();
+            var personagem = Request.QueryString["personagem"].ToString();
 
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
-
+            Session["TamagotchiLogged"] = tamagotchinome;
+            Session["Personagem"] = personagem;
+            perso.Text = Session["TamagotchiLogged"].ToString();
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
             string estado = tamagotchi_Logged.Estado;
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;        //indices do pet (definem o estado)
             Tamagotchi(fome, saude, felicidade, sono, tamagotchi_Logged.Tempo, estado, tamagotchi_Logged, database);
@@ -222,13 +226,14 @@ namespace VitutalPet___Tamagotchi
 
             var nuncanemvi = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, lastTime, estado, t, database);
             Update_Bars(sono, felicidade, fome, saude, estado);
+            perso.Text = perso.Text + " Nivel - X";
         }
 
         public void Remedio(object sender, EventArgs e)
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE FAZER COISAS DORMINDO
             {
@@ -253,7 +258,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
 
@@ -280,7 +285,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
 
             if (tamagotchi_Logged.Estado != "dormindo")
@@ -304,7 +309,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
             {
@@ -330,7 +335,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
             {
@@ -356,7 +361,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
             if (tamagotchi_Logged.Estado != "dormindo")     //NAO PODE COMER DORMINDO
             {
@@ -377,7 +382,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
             if (tamagotchi_Logged.Estado != "dormindo") //SE ESTA EM QUALQUER ESTADO ACORDADO, ENTAO...
             {
@@ -397,7 +402,7 @@ namespace VitutalPet___Tamagotchi
         {
             var database = new DatabaseConnection().GetConnection();
             String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
-            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged); //pego o tamagotchi dele
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
 
             double fome = tamagotchi_Logged.Fome, saude = tamagotchi_Logged.Saude, felicidade = tamagotchi_Logged.Felicidade, sono = tamagotchi_Logged.Sono;
 
@@ -428,6 +433,11 @@ namespace VitutalPet___Tamagotchi
             barra_felicidade.Attributes["style"] = "width: " + (int)felicidade + "%;";
             barra_fome.Attributes["style"] = "width: " + (int)fome + "%;";
             barra_vida.Attributes["style"] = "width: " + (int)saude + "%;";
+        }
+
+        public void Sair(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
         }
     }
 }

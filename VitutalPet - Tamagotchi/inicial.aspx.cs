@@ -23,8 +23,7 @@ namespace VitutalPet___Tamagotchi
             string NomeTamagotchi = nomePet.Text;
             string PersonagemEscolhido = personagem.Text;
             Tamagotchi t = new Tamagotchi().CreateTamagotchi(UserLogged.ToString(), NomeTamagotchi, PersonagemEscolhido, 0);
-            Session["Personagem"] = personagem.Text;
-            Response.Redirect("tamagotchi.aspx");
+            Page_Load(sender,e);
         }
 
         protected void SelectPersonagem(object sender, ImageClickEventArgs e)
@@ -93,8 +92,6 @@ namespace VitutalPet___Tamagotchi
             }
         }
 
-
-
         protected List<Tamagotchi> Ranking()
         {
             var CollectionTamagotchi = new DatabaseConnection().GetTamagotchiCollection();
@@ -116,6 +113,10 @@ namespace VitutalPet___Tamagotchi
         public string ReturnCaminho(string t)
         {
             return "/Person/" + t + ".JPG";
+        }
+        public void Sair(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
         }
     }
 }

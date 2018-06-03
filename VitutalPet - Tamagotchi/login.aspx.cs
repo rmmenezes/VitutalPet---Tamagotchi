@@ -39,6 +39,10 @@ namespace VitutalPet___Tamagotchi
             String user = username.Text;
             String pass = password.Text;
             var NewUser = new User().CreateUser(user, pass);
+            if(NewUser == null)
+            {
+                Response.Write("<script>alert('Hello');</script>");
+            }
         }
     }
 }

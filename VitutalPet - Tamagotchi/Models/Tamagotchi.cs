@@ -24,27 +24,51 @@ namespace VitutalPet___Tamagotchi.Models
         public Tamagotchi CreateTamagotchi(string nome_User, string nome_Tamagotchi, string personagem, int nivel)
         {
             var CollectionTamagotchi = new DatabaseConnection().GetTamagotchiCollection();
-            Tamagotchi t = new Tamagotchi()
+            var db = new DatabaseConnection().GetConnection();
+            if (ValidaTamagotchi(db, Nome_User, nome_Tamagotchi, personagem) == true)
             {
-                Nome_User = nome_User,
-                Nome_Tamagotchi = nome_Tamagotchi,
-                Saude = 100.00,
-                Sono = 100.00,
-                Fome = 100.00,
-                Felicidade = 100.00,
-                Estado = "normal",
-                Tempo = DateTime.Now,
-                Personagem = personagem,
-                Nivel = nivel,
-            };
-            CollectionTamagotchi.InsertOne(t);
-            return t;
+                Tamagotchi t = new Tamagotchi()
+                {
+                    Nome_User = nome_User,
+                    Nome_Tamagotchi = nome_Tamagotchi,
+                    Saude = 100.00,
+                    Sono = 100.00,
+                    Fome = 100.00,
+                    Felicidade = 100.00,
+                    Estado = "normal",
+                    Tempo = DateTime.Now,
+                    Personagem = personagem,
+                    Nivel = nivel,
+                };
+                CollectionTamagotchi.InsertOne(t);
+                return t;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Tamagotchi Get_tamagotchi(IMongoDatabase database, string nome_UserLogged)
+        private bool ValidaTamagotchi(IMongoDatabase db ,string nome_User, string nome_Tamagotchi, string personagem)
+        {
+            if(personagem == "[ Selecione um personagem ]" || nome_Tamagotchi == "")
+            {
+                return false;
+            }else if(Get_tamagotchi(db, nome_User, nome_Tamagotchi) != null){
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
+
+        
+
+        public Tamagotchi Get_tamagotchi(IMongoDatabase database, string nome_UserLogged, string nome_TamagotchiLogged)
         {
             var tamagotchis = database.GetCollection<Tamagotchi>("tamagotchi");
-            var res = tamagotchis.Find(x => x.Nome_User == nome_UserLogged);
+            var res = tamagotchis.Find(x => x.Nome_User == nome_UserLogged && x.Nome_Tamagotchi == nome_TamagotchiLogged);
             if (res.Count() != 0)
             {
                 return res.ToList().First();

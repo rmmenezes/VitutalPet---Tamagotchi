@@ -38,15 +38,11 @@
 </head>
 <body runat="server" id="ola" style="background-image: url(/Person/background_dia.jpg)">
     <form id="form1" runat="server">
-        <div>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" style="float: right;" class="btn btn-default navbar-btn">Sign out</button>
-                        <a class="navbar-brand" href="#">Tamagotchi</a>
-                    </div>
-                </div>
-            </nav>
+        <div class="container">
+            <br />
+            <asp:Label Text="text" ID="perso" runat="server" style="font-size:20px"/>
+            <asp:Button Text="Sair"  runat="server" CssClass="btn btn-danger btn-sm" style="text-align:right; float:right;" OnClick="Sair" />
+            <br />
             <%= Homer() %>
 
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
