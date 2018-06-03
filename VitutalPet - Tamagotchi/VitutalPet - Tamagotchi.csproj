@@ -114,6 +114,7 @@
     <Content Include="Person\Sleep\sleep1.png" />
     <Content Include="Person\Sleep\sleep2.png" />
     <Content Include="Person\wallpaper.jpg" />
+    <Content Include="ranking.aspx" />
     <Content Include="tamagotchi.aspx" />
     <Content Include="Web.config" />
     <Content Include="youtube.aspx" />
@@ -147,6 +148,13 @@
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ranking.aspx.cs">
+      <DependentUpon>ranking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ranking.aspx.designer.cs">
+      <DependentUpon>ranking.aspx</DependentUpon>
+    </Compile>
     <Compile Include="tamagotchi.aspx.cs">
       <DependentUpon>tamagotchi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

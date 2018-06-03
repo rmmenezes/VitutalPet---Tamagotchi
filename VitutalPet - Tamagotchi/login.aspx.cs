@@ -44,5 +44,10 @@ namespace VitutalPet___Tamagotchi
                 Response.Write("<script>alert('Hello');</script>");
             }
         }
+        
+        public void Btn_Ranking(object sender, EventArgs e)
+        {
+            Response.Redirect("ranking.aspx");
+        }
     }
 }

@@ -34,13 +34,14 @@
         <h1 style="text-align: center; font-family: 'Chewy', cursive; font-size: 30px">Tamagotchi Game</h1>
         <form class="form-signin" role="form" runat="server">
             <p>Login:</p>
-            <asp:TextBox runat="server" id="username" Text="" CssClass="form-control"  required="true"/>
+            <asp:TextBox runat="server" id="username" Text="" CssClass="form-control" />
             <p>Senha:</p>
           
-            <asp:TextBox runat="server" id="password" CssClass="form-control" TextMode="Password" Text=""  required="true"/>
+            <asp:TextBox runat="server" id="password" CssClass="form-control" TextMode="Password" Text="" />
             <br />
             <asp:Button Text="Sign in" runat="server" CssClass="btn btn-lg btn-success btn-block" OnClick="Btn_Entrar" />
             <asp:Button Text="Create an account" runat="server" CssClass="btn btn-lg btn-primary btn-block" OnClick="Btn_Cadastrar"  />
+            <asp:Button Text="Show Ranking" runat="server" CssClass="btn btn-lg btn-danger btn-block" OnClick="Btn_Ranking"  />
 
         </form>
 
