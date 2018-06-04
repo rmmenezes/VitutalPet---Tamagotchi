@@ -198,10 +198,8 @@ namespace VitutalPet___Tamagotchi
             {
                 txFome = 1; txFelicidade = 0; txSaude = 0; txSono = 5;
 
-                fome = fome - (((0.3 * txFome) / 15) + (deltaTime.TotalDays * txFome));
-                saude = saude - (((0.3 * txSaude) / 15) + (deltaTime.TotalDays * txSaude));
-                felicidade = felicidade - (((0.3 * txFelicidade) / 15) + (deltaTime.TotalDays * txFelicidade));
-                sono = sono - (((0.3 * txSono) / 15) + (deltaTime.TotalDays * txSono));
+                saude = saude + (((0.3 * txSaude) / 15) + (deltaTime.TotalDays * txSaude));
+                sono = sono + (((0.3 * txSono) / 15) + (deltaTime.TotalDays * txSono));
 
                 if (fome <= 0 || saude <= 0 || felicidade <= 0 || sono <= 0)
                 {
@@ -224,7 +222,7 @@ namespace VitutalPet___Tamagotchi
             TimeSpan nivelByClock = DateTime.Now - criacao; //criacao: nova variavel dos tamagotchis, quarda data e hora em que foram criados
             var nuncanemvi = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, DateTime.Now, (int)nivelByClock.TotalDays, estado, t, database);
             Update_Bars(sono, felicidade, fome, saude, estado);
-            perso.Text = perso.Text + " Nivel - " + (int)nivelByClock.TotalHours;
+            perso.Text = perso.Text + " Nivel - " + (int)nivelByClock.TotalDays;
         }
 
         public void Remedio(object sender, EventArgs e)

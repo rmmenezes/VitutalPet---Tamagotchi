@@ -1,6 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ranking.aspx.cs" Inherits="VitutalPet___Tamagotchi.Ranking" %>
 
 <!DOCTYPE html>
+
+<audio autoplay loop id="audio5">
+  <source src="/Person/audio5.mp3">
+</audio>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
