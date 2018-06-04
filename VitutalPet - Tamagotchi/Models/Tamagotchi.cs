@@ -18,6 +18,7 @@ namespace VitutalPet___Tamagotchi.Models
         public double Saude { get; set; }
         public double Sono { get; set; }
         public DateTime Tempo { get; set; }
+        public DateTime Criacao { get; set; }
         public String Personagem { get; set; }
         public int Nivel { get; set; }
 
@@ -37,6 +38,7 @@ namespace VitutalPet___Tamagotchi.Models
                     Felicidade = 100.00,
                     Estado = "normal",
                     Tempo = DateTime.Now,
+                    Criacao = DateTime.Now,
                     Personagem = personagem,
                     Nivel = nivel,
                 };
@@ -93,13 +95,14 @@ namespace VitutalPet___Tamagotchi.Models
             }
         }
 
-        public Tamagotchi Update_Tamagotchi(double fome, double saude, double felicidade, double sono, DateTime lastTime, string estado, Tamagotchi t, IMongoDatabase database)
+        public Tamagotchi Update_Tamagotchi(double fome, double saude, double felicidade, double sono, DateTime lastTime, int nivel ,string estado, Tamagotchi t, IMongoDatabase database)
         {
             var tamagotchis = new DatabaseConnection().GetTamagotchiCollection();
             var filtro = Builders<Tamagotchi>.Filter.Where(x => x.Nome_Tamagotchi == t.Nome_Tamagotchi);
             var change = Builders<Tamagotchi>.Update.Set(x => x.Estado, estado)
                                                     .Set(x => x.Fome, fome)
                                                     .Set(x => x.Saude, saude)
+                                                    .Set(x => x.Nivel, nivel)
                                                     .Set(x => x.Felicidade, felicidade)
                                                     .Set(x => x.Sono, sono)
                                                     .Set(x => x.Tempo, lastTime);
