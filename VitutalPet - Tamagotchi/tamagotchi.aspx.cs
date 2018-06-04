@@ -220,7 +220,7 @@ namespace VitutalPet___Tamagotchi
                 felicidade = 0;
             }
 
-            tempo.Text = deltaTime.TotalDays.ToString();
+            //tempo.Text = deltaTime.TotalDays.ToString();
             TimeSpan nivelByClock = DateTime.Now - criacao; //criacao: nova variavel dos tamagotchis, quarda data e hora em que foram criados
             var nuncanemvi = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, DateTime.Now, (int)nivelByClock.TotalDays, estado, t, database);
             Update_Bars(sono, felicidade, fome, saude, estado);
