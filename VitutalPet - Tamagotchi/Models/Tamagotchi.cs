@@ -37,8 +37,8 @@ namespace VitutalPet___Tamagotchi.Models
                     Fome = 100.00,
                     Felicidade = 100.00,
                     Estado = "normal",
-                    Tempo = DateTime.Now,
-                    Criacao = DateTime.Now,
+                    Tempo = DateTime.UtcNow,
+                    Criacao = DateTime.UtcNow,
                     Personagem = personagem,
                     Nivel = nivel,
                 };

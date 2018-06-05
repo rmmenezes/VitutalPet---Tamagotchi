@@ -45,16 +45,9 @@ namespace VitutalPet___Tamagotchi
         
         public int ReturnNivel(DateTime criacao)
         {
-            TimeSpan time = DateTime.Now - criacao;
+            TimeSpan time = DateTime.UtcNow - criacao;
             int n = (int)time.TotalHours;
-            if (n < 0)
-            {
-                return n * -1;
-            }
-            else
-            {
-                return n;
-            }
+            return n;
         }
        
     }
