@@ -13,8 +13,9 @@ namespace VitutalPet___Tamagotchi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
+
         protected List<Tamagotchi> ListarRanking()
         {
             var CollectionTamagotchi = new DatabaseConnection().GetTamagotchiCollection();
@@ -41,5 +42,20 @@ namespace VitutalPet___Tamagotchi
         {
             Response.Redirect("login.aspx");
         }
+        
+        public int ReturnNivel(DateTime criacao)
+        {
+            TimeSpan time = DateTime.Now - criacao;
+            int n = (int)time.TotalHours;
+            if (n < 0)
+            {
+                return n * -1;
+            }
+            else
+            {
+                return n;
+            }
+        }
+       
     }
 }

@@ -51,7 +51,7 @@
                         <a href="tamagotchi.aspx?tamagotchinome=<%= ReturnDado(cursor[cont].Nome_Tamagotchi)%>&personagem=<%= ReturnDado(cursor[cont].Personagem) %>">&nbsp;<img src="<%= ReturnCaminho(cursor[cont].Personagem)%>" alt="Kuriten" class="img-circle" style="width: 100px; height: 100px;" /></a>
                     </div> 
                     <div class="col-md-4">
-                        <h4>Nome Tamagotchi: <%= ReturnDado(cursor[cont].Nome_Tamagotchi)%> - Nivel: <%= ReturnDado(cursor[cont].Nivel.ToString()) %></h4>
+                        <h4>Nome Tamagotchi: <%= ReturnDado(cursor[cont].Nome_Tamagotchi)%> - Nivel: <%= ReturnNivel(cursor[cont].Criacao) %></h4>
                         <h4>Usuario: <%= ReturnDado(cursor[cont].Nome_User)%></h4>
                         <p>Nome Personagem: <%= ReturnDado(cursor[cont].Personagem)%> </p>
                         <p>Estado: <%= ReturnDado(cursor[cont].Estado)%> </p>

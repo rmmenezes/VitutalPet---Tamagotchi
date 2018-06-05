@@ -61,7 +61,7 @@ namespace VitutalPet___Tamagotchi
         {
             int txFome, txSaude, txFelicidade, txSono; //taxas de decaimento (muda de acordo com o estado)
 
-            TimeSpan deltaTime = lastTime.Subtract(DateTime.Now);
+            TimeSpan deltaTime = DateTime.UtcNow.Subtract(lastTime);
                  
             if (estado == "normal")
             {
@@ -218,9 +218,9 @@ namespace VitutalPet___Tamagotchi
                 felicidade = 0;
             }
 
-            //tempo.Text = deltaTime.TotalDays.ToString();
+            //tempo.Text = deltaTime.TotalHours.ToString();
             TimeSpan nivelByClock = DateTime.Now - criacao; //criacao: nova variavel dos tamagotchis, quarda data e hora em que foram criados
-            var nuncanemvi = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, DateTime.Now, (int)nivelByClock.TotalDays, estado, t, database);
+            var nuncanemvi = new Tamagotchi().Update_Tamagotchi(fome, saude, felicidade, sono, DateTime.UtcNow, (int)nivelByClock.TotalDays, estado, t, database);
             Update_Bars(sono, felicidade, fome, saude, estado);
             perso.Text = perso.Text + " Nivel - " + (int)nivelByClock.TotalDays;
         }

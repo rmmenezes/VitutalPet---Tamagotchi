@@ -15,6 +15,7 @@ namespace VitutalPet___Tamagotchi.Models
 
         public User CreateUser(string nome, string password)
         {
+            if(nome == "" && password == "") { return null; }
             var CollectionUser = new DatabaseConnection().GetUserCollection();
             User u = new User
             {
@@ -29,7 +30,6 @@ namespace VitutalPet___Tamagotchi.Models
             else
             {
                 return null;
-
             }
         }
 

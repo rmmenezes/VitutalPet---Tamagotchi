@@ -41,7 +41,7 @@ namespace VitutalPet___Tamagotchi
             var NewUser = new User().CreateUser(user, pass);
             if(NewUser == null)
             {
-                Response.Write("<script>alert('Hello');</script>");
+                Response.Write("<script>alert('Ops, Algo esta errado por aqui...');</script>");
             }
         }
         
