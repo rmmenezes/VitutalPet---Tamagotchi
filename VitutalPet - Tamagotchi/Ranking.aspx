@@ -48,7 +48,7 @@
             <div style="border-radius: 10px 20px; border-bottom-style: solid; padding-top: 0.7em; background-color: aliceblue; padding-bottom: 0.7em;">
                 <div class="row">
                     <div class="col-md-2" style="text-align: center">
-                        <a href="tamagotchi.aspx?tamagotchinome=<%= ReturnDado(cursor[cont].Nome_Tamagotchi)%>&personagem=<%= ReturnDado(cursor[cont].Personagem) %>">&nbsp;<img src="<%= ReturnCaminho(cursor[cont].Personagem)%>" alt="Kuriten" class="img-circle" style="width: 100px; height: 100px;" /></a>
+                        <img src="<%= ReturnCaminho(cursor[cont].Personagem)%>" alt="Kuriten" class="img-circle" style="width: 100px; height: 100px;" />
                     </div> 
                     <div class="col-md-4">
                         <h4>Nome Tamagotchi: <%= ReturnDado(cursor[cont].Nome_Tamagotchi)%> - Nivel: <%= ReturnNivel(cursor[cont].Criacao) %></h4>

@@ -21,6 +21,7 @@ namespace VitutalPet___Tamagotchi.Models
         public DateTime Criacao { get; set; }
         public String Personagem { get; set; }
         public int Nivel { get; set; }
+        public bool Ativo { get; set; }
 
         public Tamagotchi CreateTamagotchi(string nome_User, string nome_Tamagotchi, string personagem, int nivel)
         {
@@ -41,6 +42,7 @@ namespace VitutalPet___Tamagotchi.Models
                     Criacao = DateTime.UtcNow,
                     Personagem = personagem,
                     Nivel = nivel,
+                    Ativo = true,
                 };
                 CollectionTamagotchi.InsertOne(t);
                 return t;

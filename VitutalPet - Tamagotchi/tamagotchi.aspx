@@ -41,7 +41,8 @@
         <div class="container">
             <br />
             <asp:Label Text="text" ID="perso" runat="server" style="font-size:20px"/>
-            <asp:Button Text="Sair"  runat="server" CssClass="btn btn-danger btn-sm" style="text-align:right; float:right;" OnClick="Sair" />
+            <asp:Button Text="Voltar"  runat="server" CssClass="btn btn-danger btn-sm" style="text-align:right; float:right;" OnClick="Voltar" />
+            <asp:Button Text="Remover"  runat="server" CssClass="btn btn-warning btn-sm" style="text-align:right; float:right;" OnClick="RemoverTamagotchi" />
             <br />
             <%= Homer() %>
 

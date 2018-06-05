@@ -19,7 +19,7 @@ namespace VitutalPet___Tamagotchi
         protected List<Tamagotchi> ListarRanking()
         {
             var CollectionTamagotchi = new DatabaseConnection().GetTamagotchiCollection();
-            var res = CollectionTamagotchi.Find(x => x.Nivel > -1).ToList().OrderByDescending(s => s.Nivel).ToList();
+            var res = CollectionTamagotchi.Find(x => x.Ativo == true && x.Estado != "morto").ToList().OrderByDescending(s => s.Nivel).ToList();
             if (res.Count() != 0)
             {
                 return res;

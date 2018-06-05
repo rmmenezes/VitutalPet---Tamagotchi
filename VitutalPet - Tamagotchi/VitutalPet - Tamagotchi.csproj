@@ -91,6 +91,7 @@
     <Content Include="Global.asax" />
     <Content Include="inicial.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="Person\cortina.jpg" />
     <Content Include="Person\audio.mp3" />
     <Content Include="Person\background_dia.jpg" />
     <Content Include="Person\background_cine.jpg" />

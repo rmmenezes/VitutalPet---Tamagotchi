@@ -448,9 +448,21 @@ namespace VitutalPet___Tamagotchi
             barra_vida.Attributes["style"] = "width: " + (int)saude + "%;";
         }
 
-        public void Sair(object sender, EventArgs e)
+        public void RemoverTamagotchi(object sender, EventArgs e)
         {
-            Response.Redirect("login.aspx");
+            var database = new DatabaseConnection().GetConnection();
+            String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            Tamagotchi t = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
+            var tamagotchis = new DatabaseConnection().GetTamagotchiCollection();
+            var filtro = Builders<Tamagotchi>.Filter.Where(x => x.Nome_Tamagotchi == t.Nome_Tamagotchi && x.Nome_User == nome_UserLogged);
+            var change = Builders<Tamagotchi>.Update.Set(x => x.Ativo, false);
+            tamagotchis.UpdateOne(filtro, change);
+            Response.Redirect("inicial.aspx");
+        }
+
+        public void Voltar(object sender, EventArgs e)
+        {
+            Response.Redirect("inicial.aspx");
         }
     }
 }

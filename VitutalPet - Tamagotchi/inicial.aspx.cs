@@ -95,7 +95,7 @@ namespace VitutalPet___Tamagotchi
         protected List<Tamagotchi> Ranking()
         {
             var CollectionTamagotchi = new DatabaseConnection().GetTamagotchiCollection();
-            var res = CollectionTamagotchi.Find(x => x.Nome_User == Session["Auth"].ToString()).ToList().OrderByDescending(s => s.Nivel).ToList();
+            var res = CollectionTamagotchi.Find(x => x.Nome_User == Session["Auth"].ToString() && x.Estado != "morto" && x.Ativo == true).ToList().OrderByDescending(s => s.Nivel).ToList();
             if (res.Count() != 0)
             {
                 return res ;
@@ -105,6 +105,7 @@ namespace VitutalPet___Tamagotchi
                 return null;
             }
         }
+
 
         public string ReturnDado(string t)
         {
@@ -117,6 +118,13 @@ namespace VitutalPet___Tamagotchi
         public void Sair(object sender, EventArgs e)
         {
             Response.Redirect("login.aspx");
+        }
+
+        public int ReturnNivel(DateTime criacao)
+        {
+            TimeSpan time = DateTime.UtcNow - criacao;
+            int n = (int)time.TotalHours;
+            return n;
         }
     }
 }
