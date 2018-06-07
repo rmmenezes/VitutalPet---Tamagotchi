@@ -436,7 +436,15 @@ namespace VitutalPet___Tamagotchi
 
         public void WatchYoutube(object sender, EventArgs e)
         {
-            Response.Redirect("youtube.aspx");
+            var database = new DatabaseConnection().GetConnection();
+            String nome_UserLogged = Session["Auth"].ToString();    //Nome do user logado
+            Tamagotchi tamagotchi_Logged = new Tamagotchi().Get_tamagotchi(database, nome_UserLogged, Session["TamagotchiLogged"].ToString()); //pego o tamagotchi dele
+
+            if (tamagotchi_Logged.Estado != "dormindo")
+            {
+                tamagotchi_Logged.Update_Tamagotchi(tamagotchi_Logged.Fome, tamagotchi_Logged.Saude, tamagotchi_Logged.Felicidade, tamagotchi_Logged.Sono, tamagotchi_Logged.Tempo, tamagotchi_Logged.Nivel, tamagotchi_Logged.Estado = "jogando", tamagotchi_Logged, database);
+                Response.Redirect("youtube.aspx");
+            }
         }
 
         public void Update_Bars(double sono, double felicidade, double fome, double saude, string estado)
